@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>展馆叠叠乐</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-frame" aria-label="展馆叠叠乐小游戏">
+        <header class="top-bar">
+          <div>
+            <p class="eyebrow">Live Pavilion Builder</p>
+            <h1>展馆叠叠乐</h1>
+          </div>
+          <div class="status-strip">
+            <div>
+              <span>阶段</span>
+              <strong id="phaseText">等待开始</strong>
+            </div>
+            <div>
+              <span>层数</span>
+              <strong><b id="levelText">0</b> / <b id="targetText">10</b></strong>
+            </div>
+            <div>
+              <span>提示</span>
+              <strong id="messageText">准备开工</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="content-grid">
+          <section class="stage-wrap">
+            <div class="stage-head">
+              <div>
+                <span class="tiny-label">展馆舞台</span>
+                <strong id="countdownText">点击开始</strong>
+              </div>
+              <div class="turn-timer" aria-label="主播操作倒计时">
+                <span id="turnTimerText">等待开工</span>
+                <div class="turn-timer-track">
+                  <div class="turn-timer-fill" id="turnTimerFill"></div>
+                </div>
+              </div>
+              <button class="icon-btn" id="soundBtn" type="button" title="切换氛围">♪</button>
+            </div>
+            <div class="stage" id="stage">
+              <div class="aurora"></div>
+              <div class="spotlight spotlight-left"></div>
+              <div class="spotlight spotlight-right"></div>
+              <div class="tower" id="tower"></div>
+              <div class="workers" id="workers">
+                <span>🐻</span><span>🐱</span><span>🐼</span><span>🦊</span>
+              </div>
+              <div class="toast-layer" id="toastLayer"></div>
+            </div>
+          </section>
+
+          <aside class="side-panel">
+            <div class="metric-panel">
+              <div class="metric">
+                <span>当前高度</span>
+                <strong id="heightText">0 层</strong>
+              </div>
+              <div class="metric">
+                <span>Perfect</span>
+                <strong id="perfectText">0 次</strong>
+              </div>
+              <div class="metric">
+                <span>最佳连击</span>
+                <strong id="comboText">0 连</strong>
+              </div>
+            </div>
+
+            <div class="energy-card">
+              <div class="energy-title">
+                <span>建设能量</span>
+                <strong id="energyText">0 / 100</strong>
+              </div>
+              <div class="energy-track">
+                <div class="energy-fill" id="energyFill"></div>
+              </div>
+              <p id="boostText">能量越高，移动越稳。</p>
+            </div>
+
+            <div class="board">
+              <div class="board-title">
+                <span>贡献用户榜</span>
+                <strong id="leaderText">@小橙子</strong>
+              </div>
+              <ol id="contributors"></ol>
+            </div>
+          </aside>
+        </section>
+
+        <footer class="control-panel">
+          <button id="startBtn" type="button">开始游戏</button>
+          <button id="likeBtn" type="button">点赞助力</button>
+          <button id="commentBtn" type="button">弹幕助力</button>
+          <button id="giftBtn" type="button">礼物助力</button>
+          <button id="dropBtn" type="button">主播落层</button>
+          <button id="autoBtn" type="button" class="secondary">自动模式</button>
+          <button id="resetBtn" type="button" class="secondary">再来一局</button>
+        </footer>
+      </section>
+    </main>
+
+    <div class="result-modal hidden" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <div class="result-card">
+        <p class="eyebrow">Final Report</p>
+        <h2 id="resultTitle">展馆建设完成</h2>
+        <div class="result-grid">
+          <div><span>本局高度</span><strong id="resultHeight">0 层</strong></div>
+          <div><span>Perfect</span><strong id="resultPerfect">0 次</strong></div>
+          <div><span>最佳连击</span><strong id="resultCombo">0 连</strong></div>
+          <div><span>最强助力</span><strong id="resultLeader">@小橙子</strong></div>
+        </div>
+        <p id="resultComment">展馆施工队已就位。</p>
+        <button id="modalResetBtn" type="button">再来一局</button>
+      </div>
+    </div>
+
+    <script src="./game.js"></script>
+  </body>
+</html>
