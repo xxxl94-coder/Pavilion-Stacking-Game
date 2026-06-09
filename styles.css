@@ -760,21 +760,7 @@ h1 {
   }
 
   .tap-hint {
-    position: absolute;
-    left: 50%;
-    bottom: max(54px, calc(env(safe-area-inset-bottom) + 38px));
-    z-index: 9;
-    display: block;
-    transform: translateX(-50%);
-    padding: 11px 18px;
-    border-radius: 999px;
-    color: #263044;
-    font-size: 15px;
-    font-weight: 900;
-    background: rgba(255, 255, 255, 0.54);
-    box-shadow: 0 8px 22px rgba(38, 48, 68, 0.14);
-    backdrop-filter: blur(10px);
-    pointer-events: none;
+    display: none;
   }
 
   .tap-hint.hidden {
