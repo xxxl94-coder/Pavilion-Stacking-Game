@@ -272,6 +272,10 @@ h1 {
   display: none;
 }
 
+.tap-hint {
+  display: none;
+}
+
 .floor {
   position: absolute;
   height: 34px;
@@ -755,6 +759,28 @@ h1 {
     display: none;
   }
 
+  .tap-hint {
+    position: absolute;
+    left: 50%;
+    bottom: max(54px, calc(env(safe-area-inset-bottom) + 38px));
+    z-index: 9;
+    display: block;
+    transform: translateX(-50%);
+    padding: 11px 18px;
+    border-radius: 999px;
+    color: #263044;
+    font-size: 15px;
+    font-weight: 900;
+    background: rgba(255, 255, 255, 0.54);
+    box-shadow: 0 8px 22px rgba(38, 48, 68, 0.14);
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+  }
+
+  .tap-hint.hidden {
+    display: none;
+  }
+
   .side-panel {
     display: none;
   }
@@ -786,7 +812,17 @@ h1 {
 
   #likeBtn,
   #commentBtn,
-  #giftBtn {
+  #giftBtn,
+  #dropBtn {
+    display: none;
+  }
+
+  body[data-phase="waiting"] .control-panel,
+  body[data-phase="countdown"] .control-panel,
+  body[data-phase="dropping"] .control-panel,
+  body[data-phase="judging"] .control-panel,
+  body[data-phase="moving"] .control-panel,
+  body[data-phase="result"] .control-panel {
     display: none;
   }
 

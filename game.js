@@ -83,6 +83,7 @@ const el = {
   energyText: byId("energyText"),
   energyFill: byId("energyFill"),
   boostText: byId("boostText"),
+  tapHint: byId("tapHint"),
   mobileHeightText: byId("mobileHeightText"),
   mobilePerfectText: byId("mobilePerfectText"),
   mobileEnergyText: byId("mobileEnergyText"),
@@ -589,6 +590,8 @@ function render() {
   if (state.phase === "waiting") el.countdownText.textContent = "点击开始";
   if (state.phase === "moving") el.countdownText.textContent = "楼层移动中";
   if (state.phase === "result") el.countdownText.textContent = "本局结算";
+  el.tapHint.textContent = state.phase === "moving" ? "点击屏幕落层" : "点击屏幕开始";
+  el.tapHint.classList.toggle("hidden", state.phase !== "waiting" && state.phase !== "moving");
   renderTurnTimer();
   el.dropBtn.disabled = state.phase !== "moving";
   el.startBtn.disabled = state.phase !== "waiting" && state.phase !== "result";
