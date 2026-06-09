@@ -64,6 +64,7 @@ let countdownTimer = 0;
 let autoTimer = 0;
 let turnTimer = 0;
 let boostTimer = 0;
+let audienceTimer = 0;
 
 const el = {
   phaseText: byId("phaseText"),
@@ -170,6 +171,7 @@ function startGame() {
   el.resultModal.classList.add("hidden");
   state.phase = "countdown";
   state.message = "施工队集合中";
+  startAudienceAssist();
   render();
 
   let count = 3;
@@ -337,6 +339,7 @@ function handleTimeout() {
 
 function finishGame(success) {
   stopTurnTimer();
+  stopAudienceAssist();
   cancelAnimationFrame(rafId);
   state.phase = "result";
   state.message = success ? "冲顶成功，全场庆祝" : "本局结束，差点封神";
@@ -351,6 +354,7 @@ function finishGame(success) {
 function resetGame() {
   clearInterval(countdownTimer);
   stopTurnTimer();
+  stopAudienceAssist();
   clearTimeout(boostTimer);
   cancelAnimationFrame(rafId);
   state = createInitialState();
@@ -429,6 +433,30 @@ function addEnergy(type, amount, strongBoost = false) {
   spawnParticles(names[type][2], type === "gift" ? 14 : 8);
   pulseWorkers();
   render();
+}
+
+function startAudienceAssist() {
+  stopAudienceAssist();
+  const assistTypes = [
+    ["like", CONFIG.energy.likeGain],
+    ["comment", CONFIG.energy.commentGain],
+    ["gift", CONFIG.energy.giftGain],
+  ];
+
+  const tickAssist = () => {
+    if (state.phase === "result" || state.phase === "waiting") return;
+    if (state.phase === "moving" || state.phase === "countdown") {
+      const [type, amount] = assistTypes[Math.floor(Math.random() * assistTypes.length)];
+      addEnergy(type, amount, type === "gift" && Math.random() > 0.45);
+    }
+    audienceTimer = setTimeout(tickAssist, 1800 + Math.random() * 2200);
+  };
+
+  audienceTimer = setTimeout(tickAssist, 1200);
+}
+
+function stopAudienceAssist() {
+  clearTimeout(audienceTimer);
 }
 
 function getMoveSpeed() {
@@ -581,11 +609,12 @@ function renderTower() {
   const scaleY = stageRect.height / CONFIG.stageHeight;
   const allFloors = [...state.floors, ...state.scraps];
   if (state.currentFloor) allFloors.push(state.currentFloor);
+  const cameraOffset = getCameraOffset();
 
   el.tower.innerHTML = allFloors.map((floor) => {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
-    const bottom = floor.bottom * scaleY;
+    const bottom = (floor.bottom - cameraOffset) * scaleY;
     const height = (floor.level === 0 ? 42 : CONFIG.floorHeight) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
@@ -593,6 +622,14 @@ function renderTower() {
     if (floor === state.currentFloor) classes.push("current");
     return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px"></div>`;
   }).join("");
+}
+
+function getCameraOffset() {
+  const top = state.currentFloor || getTopFloor();
+  if (!top) return 0;
+  const visibleTopLimit = CONFIG.stageHeight * 0.68;
+  const topEdge = top.bottom + CONFIG.floorHeight;
+  return Math.max(0, topEdge - visibleTopLimit);
 }
 
 function renderContributors() {
