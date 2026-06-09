@@ -763,7 +763,7 @@ h1 {
     position: absolute;
     left: 10px;
     right: 10px;
-    bottom: max(86px, calc(env(safe-area-inset-bottom) + 66px));
+    bottom: max(54px, calc(env(safe-area-inset-bottom) + 38px));
     z-index: 9;
     display: block;
     padding: 0;
@@ -851,7 +851,7 @@ h1 {
   .control-panel {
     left: 8px;
     right: 8px;
-    bottom: max(86px, calc(env(safe-area-inset-bottom) + 66px));
+    bottom: max(54px, calc(env(safe-area-inset-bottom) + 38px));
   }
 
   #startBtn,
