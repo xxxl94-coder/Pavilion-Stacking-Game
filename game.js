@@ -541,6 +541,7 @@ function getLeader() {
 }
 
 function render() {
+  document.body.dataset.phase = state.phase;
   el.phaseText.textContent = phaseNames[state.phase];
   el.levelText.textContent = state.currentLevel;
   el.targetText.textContent = state.targetLevel;
