@@ -201,7 +201,7 @@ function spawnCurrentFloor() {
     level: state.currentLevel + 1,
     x: fromLeft ? 12 : CONFIG.stageWidth - width - 12,
     width,
-    bottom: CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset - worldShift,
+    bottom: CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset + worldShift,
     quality: "current",
   };
   state.direction = fromLeft ? 1 : -1;
@@ -615,7 +615,7 @@ function renderTower() {
   el.tower.innerHTML = allFloors.map((floor) => {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
-    const bottom = (floor.bottom + worldShift) * scaleY;
+    const bottom = (floor.bottom - worldShift) * scaleY;
     const height = (floor.level === 0 ? 42 : CONFIG.floorHeight) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");

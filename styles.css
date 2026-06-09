@@ -734,7 +734,7 @@ h1 {
 
   .stage::after {
     height: 118px;
-    bottom: var(--world-shift-px, 0px);
+    bottom: calc(0px - var(--world-shift-px, 0px));
     background:
       linear-gradient(90deg, rgba(38, 48, 68, 0.12) 1px, transparent 1px) 0 0 / 48px 100%,
       linear-gradient(180deg, rgba(255, 222, 139, 0.9), rgba(255, 205, 103, 0.95));
@@ -746,7 +746,7 @@ h1 {
 
   .workers {
     left: 18px;
-    bottom: calc(126px + var(--world-shift-px, 0px));
+    bottom: calc(126px - var(--world-shift-px, 0px));
     font-size: 24px;
     opacity: var(--ground-actor-opacity, 1);
   }
