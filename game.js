@@ -1,5 +1,5 @@
 const CONFIG = {
-  targetLevel: 10,
+  targetLevel: Infinity,
   lives: 1,
   stageWidth: 720,
   stageHeight: 480,
@@ -19,6 +19,7 @@ const CONFIG = {
     nextFloorDelayMs: 820,
     turnTimeMs: 4200,
     autoDropSafetyMs: 700,
+    cameraStepPerFloor: 34,
   },
   judgement: {
     perfectRatio: 0.92,
@@ -194,12 +195,13 @@ function spawnCurrentFloor() {
   const previous = getTopFloor();
   const width = Math.max(previous.width, CONFIG.minWidth);
   const fromLeft = state.currentLevel % 2 === 0;
+  const cameraOffset = getCameraOffset();
   state.currentFloor = {
     id: `floor-${Date.now()}`,
     level: state.currentLevel + 1,
     x: fromLeft ? 12 : CONFIG.stageWidth - width - 12,
     width,
-    bottom: CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset,
+    bottom: cameraOffset + CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset,
     quality: "current",
   };
   state.direction = fromLeft ? 1 : -1;
@@ -306,10 +308,6 @@ function judgeCurrentFloor() {
 
   maybeMilestone();
   render();
-  if (state.currentLevel >= state.targetLevel) {
-    finishGame(true);
-    return;
-  }
   setTimeout(spawnCurrentFloor, CONFIG.gameplay.nextFloorDelayMs);
 }
 
@@ -342,7 +340,7 @@ function finishGame(success) {
   stopAudienceAssist();
   cancelAnimationFrame(rafId);
   state.phase = "result";
-  state.message = success ? "冲顶成功，全场庆祝" : "本局结束，差点封神";
+  state.message = success ? "冲顶成功，全场庆祝" : "本局结束，挑战终止";
   if (success) {
     el.stage.classList.add("success");
     burstConfetti();
@@ -499,7 +497,7 @@ function maybeMilestone() {
     3: "展馆亮灯！",
     5: "施工队庆祝！",
     8: "金色光效启动！",
-    10: "冲顶成功！",
+    10: "突破 10 层！",
   }[state.currentLevel];
   if (!text) return;
   showFloating(text, 45, 22);
@@ -575,7 +573,7 @@ function render() {
   document.body.dataset.phase = state.phase;
   el.phaseText.textContent = phaseNames[state.phase];
   el.levelText.textContent = state.currentLevel;
-  el.targetText.textContent = state.targetLevel;
+  el.targetText.textContent = Number.isFinite(state.targetLevel) ? state.targetLevel : "∞";
   el.messageText.textContent = state.message;
   el.heightText.textContent = `${state.currentLevel} 层`;
   el.perfectText.textContent = `${state.perfectCount} 次`;
@@ -625,11 +623,7 @@ function renderTower() {
 }
 
 function getCameraOffset() {
-  const top = state.currentFloor || getTopFloor();
-  if (!top) return 0;
-  const visibleTopLimit = CONFIG.stageHeight * 0.68;
-  const topEdge = top.bottom + CONFIG.floorHeight;
-  return Math.max(0, topEdge - visibleTopLimit);
+  return state.currentLevel * CONFIG.gameplay.cameraStepPerFloor;
 }
 
 function renderContributors() {
