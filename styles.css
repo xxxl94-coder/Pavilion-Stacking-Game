@@ -681,13 +681,12 @@ h1 {
 
   .stage-head {
     position: absolute;
-    top: max(82px, calc(env(safe-area-inset-top) + 56px));
-    left: 8px;
-    right: 8px;
+    top: max(72px, calc(env(safe-area-inset-top) + 48px));
+    left: 12px;
+    right: 72px;
     z-index: 8;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 40px;
-    gap: 6px;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .stage-head > div:first-child {
@@ -699,12 +698,33 @@ h1 {
   }
 
   .icon-btn {
-    width: 40px;
-    min-height: 40px;
+    position: absolute;
+    top: 0;
+    right: -60px;
+    width: 46px;
+    min-height: 34px;
+    border-radius: 999px;
   }
 
   .turn-timer {
-    padding: 6px 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .turn-timer span {
+    margin: 0 0 3px;
+    color: rgba(38, 48, 68, 0.72);
+    font-size: 11px;
+    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.6);
+  }
+
+  .turn-timer-track {
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.42);
+    box-shadow: 0 1px 8px rgba(38, 48, 68, 0.12);
   }
 
   .stage {
@@ -737,7 +757,7 @@ h1 {
 
   .mobile-hud {
     position: absolute;
-    top: max(138px, calc(env(safe-area-inset-top) + 112px));
+    top: max(98px, calc(env(safe-area-inset-top) + 74px));
     left: 10px;
     right: 10px;
     z-index: 7;
@@ -748,13 +768,13 @@ h1 {
   }
 
   .mobile-hud span {
-    padding: 5px 8px;
+    padding: 4px 7px;
     border-radius: 999px;
     color: #263044;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 900;
-    background: rgba(255, 255, 255, 0.62);
-    box-shadow: 0 6px 16px rgba(38, 48, 68, 0.12);
+    background: rgba(255, 255, 255, 0.46);
+    box-shadow: 0 4px 12px rgba(38, 48, 68, 0.1);
     backdrop-filter: blur(8px);
   }
 
@@ -836,25 +856,25 @@ h1 {
   }
 
   .stage-head {
-    top: max(74px, calc(env(safe-area-inset-top) + 48px));
-    left: 8px;
-    right: 8px;
-    grid-template-columns: minmax(0, 1fr) 38px;
+    top: max(66px, calc(env(safe-area-inset-top) + 42px));
+    left: 10px;
+    right: 62px;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .mobile-hud {
-    top: max(126px, calc(env(safe-area-inset-top) + 98px));
+    top: max(92px, calc(env(safe-area-inset-top) + 68px));
   }
 
   .turn-timer {
     grid-column: auto;
     grid-row: auto;
-    padding: 5px 7px;
   }
 
   .icon-btn {
-    width: 38px;
-    min-height: 38px;
+    right: -52px;
+    width: 40px;
+    min-height: 32px;
   }
 
   .control-panel {
