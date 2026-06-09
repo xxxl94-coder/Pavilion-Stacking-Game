@@ -201,7 +201,7 @@ function spawnCurrentFloor() {
     level: state.currentLevel + 1,
     x: fromLeft ? 12 : CONFIG.stageWidth - width - 12,
     width,
-    bottom: cameraOffset + CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset,
+    bottom: CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset - cameraOffset,
     quality: "current",
   };
   state.direction = fromLeft ? 1 : -1;
@@ -608,11 +608,12 @@ function renderTower() {
   const allFloors = [...state.floors, ...state.scraps];
   if (state.currentFloor) allFloors.push(state.currentFloor);
   const cameraOffset = getCameraOffset();
+  el.stage.style.setProperty("--camera-offset-px", `${cameraOffset * scaleY}px`);
 
   el.tower.innerHTML = allFloors.map((floor) => {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
-    const bottom = (floor.bottom - cameraOffset) * scaleY;
+    const bottom = (floor.bottom + cameraOffset) * scaleY;
     const height = (floor.level === 0 ? 42 : CONFIG.floorHeight) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
