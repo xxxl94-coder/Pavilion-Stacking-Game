@@ -20,6 +20,7 @@ const CONFIG = {
     turnTimeMs: 4200,
     autoDropSafetyMs: 700,
     cameraStepPerFloor: 34,
+    mobileStackLift: 220,
   },
   judgement: {
     perfectRatio: 0.92,
@@ -195,13 +196,13 @@ function spawnCurrentFloor() {
   const previous = getTopFloor();
   const width = Math.max(previous.width, CONFIG.minWidth);
   const fromLeft = state.currentLevel % 2 === 0;
-  const cameraOffset = getCameraOffset();
+  const worldShift = getWorldShift();
   state.currentFloor = {
     id: `floor-${Date.now()}`,
     level: state.currentLevel + 1,
     x: fromLeft ? 12 : CONFIG.stageWidth - width - 12,
     width,
-    bottom: CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset - cameraOffset,
+    bottom: CONFIG.stageHeight - CONFIG.gameplay.newFloorTopOffset - worldShift,
     quality: "current",
   };
   state.direction = fromLeft ? 1 : -1;
@@ -607,14 +608,15 @@ function renderTower() {
   const scaleY = stageRect.height / CONFIG.stageHeight;
   const allFloors = [...state.floors, ...state.scraps];
   if (state.currentFloor) allFloors.push(state.currentFloor);
-  const cameraOffset = getCameraOffset();
-  el.stage.style.setProperty("--camera-offset-px", `${cameraOffset * scaleY}px`);
-  el.stage.style.setProperty("--ground-actor-opacity", `${Math.max(0, 1 - cameraOffset / 120)}`);
+  const worldShift = getWorldShift();
+  const cameraStep = getCameraStep();
+  el.stage.style.setProperty("--world-shift-px", `${worldShift * scaleY}px`);
+  el.stage.style.setProperty("--ground-actor-opacity", `${Math.max(0, 1 - cameraStep / 120)}`);
 
   el.tower.innerHTML = allFloors.map((floor) => {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
-    const bottom = (floor.bottom + cameraOffset) * scaleY;
+    const bottom = (floor.bottom + worldShift) * scaleY;
     const height = (floor.level === 0 ? 42 : CONFIG.floorHeight) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
@@ -624,8 +626,14 @@ function renderTower() {
   }).join("");
 }
 
-function getCameraOffset() {
+function getCameraStep() {
   return state.currentLevel * CONFIG.gameplay.cameraStepPerFloor;
+}
+
+function getWorldShift() {
+  const isMobileLayout = window.matchMedia("(max-width: 980px)").matches;
+  if (!isMobileLayout || state.phase === "waiting") return 0;
+  return CONFIG.gameplay.mobileStackLift - getCameraStep();
 }
 
 function renderContributors() {
