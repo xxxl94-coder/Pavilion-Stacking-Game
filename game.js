@@ -20,7 +20,6 @@ const CONFIG = {
     turnTimeMs: 4200,
     autoDropSafetyMs: 700,
     cameraStepPerFloor: 34,
-    mobileStackLift: 220,
   },
   judgement: {
     perfectRatio: 0.92,
@@ -632,8 +631,8 @@ function getCameraStep() {
 
 function getWorldShift() {
   const isMobileLayout = window.matchMedia("(max-width: 980px)").matches;
-  if (!isMobileLayout || state.phase === "waiting") return 0;
-  return CONFIG.gameplay.mobileStackLift - getCameraStep();
+  if (!isMobileLayout) return 0;
+  return getCameraStep();
 }
 
 function renderContributors() {
