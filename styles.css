@@ -677,9 +677,9 @@ h1 {
 
   .stage-head {
     position: absolute;
-    top: max(72px, calc(env(safe-area-inset-top) + 48px));
-    left: 12px;
-    right: 72px;
+    top: max(2px, env(safe-area-inset-top));
+    left: 0;
+    right: 0;
     z-index: 8;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -705,17 +705,20 @@ h1 {
   }
 
   .turn-timer span {
-    margin: 0 0 3px;
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    margin: 0;
     color: rgba(38, 48, 68, 0.72);
     font-size: 11px;
     text-shadow: 0 1px 8px rgba(255, 255, 255, 0.6);
   }
 
   .turn-timer-track {
-    height: 7px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.42);
-    box-shadow: 0 1px 8px rgba(38, 48, 68, 0.12);
+    height: 4px;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.32);
+    box-shadow: none;
   }
 
   .stage {
@@ -745,6 +748,7 @@ h1 {
     left: 18px;
     bottom: calc(126px + var(--camera-offset-px, 0px));
     font-size: 24px;
+    opacity: var(--ground-actor-opacity, 1);
   }
 
   .mobile-hud {
@@ -759,7 +763,7 @@ h1 {
     position: absolute;
     left: 10px;
     right: 10px;
-    bottom: max(10px, env(safe-area-inset-bottom));
+    bottom: max(86px, calc(env(safe-area-inset-bottom) + 66px));
     z-index: 9;
     display: block;
     padding: 0;
@@ -776,7 +780,7 @@ h1 {
   #startBtn,
   #dropBtn {
     width: 100%;
-    min-height: 58px;
+    min-height: 54px;
     font-size: 18px;
   }
 
@@ -833,9 +837,9 @@ h1 {
   }
 
   .stage-head {
-    top: max(52px, calc(env(safe-area-inset-top) + 28px));
-    left: 10px;
-    right: 10px;
+    top: max(2px, env(safe-area-inset-top));
+    left: 0;
+    right: 0;
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -847,6 +851,7 @@ h1 {
   .control-panel {
     left: 8px;
     right: 8px;
+    bottom: max(86px, calc(env(safe-area-inset-bottom) + 66px));
   }
 
   #startBtn,

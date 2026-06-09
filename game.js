@@ -609,6 +609,7 @@ function renderTower() {
   if (state.currentFloor) allFloors.push(state.currentFloor);
   const cameraOffset = getCameraOffset();
   el.stage.style.setProperty("--camera-offset-px", `${cameraOffset * scaleY}px`);
+  el.stage.style.setProperty("--ground-actor-opacity", `${Math.max(0, 1 - cameraOffset / 120)}`);
 
   el.tower.innerHTML = allFloors.map((floor) => {
     const left = floor.x * scaleX;
