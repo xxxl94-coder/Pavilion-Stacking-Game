@@ -150,7 +150,16 @@ function bindEvents() {
   el.resetBtn.addEventListener("click", resetGame);
   el.modalResetBtn.addEventListener("click", resetGame);
   el.soundBtn.addEventListener("click", () => showFloating("♪ 现场气氛升温", 76, 58));
+  el.stage.addEventListener("click", handleStageTap);
   window.addEventListener("resize", render);
+}
+
+function handleStageTap() {
+  if (state.phase === "waiting" || state.phase === "result") {
+    startGame();
+    return;
+  }
+  if (state.phase === "moving") dropCurrentFloor();
 }
 
 function startGame() {

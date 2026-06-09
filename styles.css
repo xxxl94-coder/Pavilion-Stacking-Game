@@ -578,49 +578,176 @@ h1 {
 }
 
 @media (max-width: 980px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
   .app-shell {
-    padding: 12px;
+    min-height: 100svh;
+    padding: 8px;
+    place-items: stretch;
   }
 
   .game-frame {
     aspect-ratio: auto;
+    height: calc(100svh - 16px);
     min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 10px;
+    overflow: hidden;
   }
 
-  .top-bar,
+  .top-bar {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .top-bar .eyebrow {
+    display: none;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .status-strip {
+    grid-template-columns: 0.8fr 0.55fr 1.15fr;
+    gap: 6px;
+  }
+
+  .status-strip > div {
+    padding: 7px 8px;
+  }
+
+  .status-strip span {
+    font-size: 11px;
+  }
+
+  .status-strip strong {
+    font-size: 13px;
+  }
+
   .content-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .stage-wrap {
+    min-height: 0;
+    gap: 7px;
+  }
+
+  .stage-head {
+    grid-template-columns: minmax(98px, auto) minmax(120px, 1fr) 40px;
+    gap: 7px;
+  }
+
+  .stage-head strong {
+    font-size: 15px;
+  }
+
+  .icon-btn {
+    width: 40px;
+    min-height: 40px;
+  }
+
+  .turn-timer {
+    padding: 6px 8px;
   }
 
   .stage {
-    height: 520px;
+    height: auto;
+    min-height: 0;
   }
 
   .side-panel {
-    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 6px;
+    min-height: 0;
+  }
+
+  .metric-panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .metric,
+  .energy-card {
+    padding: 8px;
+  }
+
+  .metric strong {
+    font-size: 17px;
+  }
+
+  .energy-track {
+    height: 10px;
+    margin: 8px 0 0;
+  }
+
+  .energy-card p,
+  .board {
+    display: none;
   }
 
   .control-panel {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .control-panel button {
+    min-height: 42px;
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+  #startBtn,
+  #dropBtn {
+    grid-column: span 2;
+    min-height: 50px;
+    font-size: 16px;
+  }
+
+  #resetBtn {
+    display: none;
   }
 }
 
 @media (max-width: 560px) {
-  h1 {
-    font-size: 28px;
+  .game-frame {
+    height: calc(100svh - 10px);
+    padding: 7px;
+    gap: 6px;
   }
 
-  .status-strip,
+  h1 {
+    font-size: 20px;
+  }
+
   .result-grid {
     grid-template-columns: 1fr;
   }
 
-  .stage {
-    height: 480px;
+  .status-strip {
+    grid-template-columns: 0.72fr 0.54fr 1fr;
+  }
+
+  .status-strip > div {
+    padding: 6px;
+  }
+
+  .status-strip strong {
+    font-size: 12px;
   }
 
   .stage-head {
-    grid-template-columns: 1fr 44px;
+    grid-template-columns: 1fr 40px;
   }
 
   .turn-timer {
@@ -629,6 +756,15 @@ h1 {
   }
 
   .control-panel {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #startBtn,
+  #dropBtn {
+    grid-column: span 3;
+  }
+
+  #autoBtn {
+    display: none;
   }
 }
