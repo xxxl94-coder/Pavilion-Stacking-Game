@@ -143,6 +143,7 @@ function createInitialState() {
     turnStartedAt: 0,
     turnEndsAt: 0,
     lastQuality: "",
+    tapHintDismissed: false,
   };
 }
 
@@ -161,6 +162,7 @@ function bindEvents() {
 }
 
 function handleStageTap() {
+  state.tapHintDismissed = true;
   if (state.phase === "waiting" || state.phase === "result") {
     startGame();
     return;
@@ -591,7 +593,8 @@ function render() {
   if (state.phase === "moving") el.countdownText.textContent = "楼层移动中";
   if (state.phase === "result") el.countdownText.textContent = "本局结算";
   el.tapHint.textContent = state.phase === "moving" ? "点击屏幕落层" : "点击屏幕开始";
-  el.tapHint.classList.toggle("hidden", state.phase !== "waiting" && state.phase !== "moving");
+  const shouldShowTapHint = !state.tapHintDismissed && (state.phase === "waiting" || state.phase === "moving");
+  el.tapHint.classList.toggle("hidden", !shouldShowTapHint);
   renderTurnTimer();
   el.dropBtn.disabled = state.phase !== "moving";
   el.startBtn.disabled = state.phase !== "waiting" && state.phase !== "result";
