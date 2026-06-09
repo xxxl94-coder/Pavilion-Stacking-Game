@@ -81,6 +81,9 @@ const el = {
   energyText: byId("energyText"),
   energyFill: byId("energyFill"),
   boostText: byId("boostText"),
+  mobileHeightText: byId("mobileHeightText"),
+  mobilePerfectText: byId("mobilePerfectText"),
+  mobileEnergyText: byId("mobileEnergyText"),
   turnTimerText: byId("turnTimerText"),
   turnTimerFill: byId("turnTimerFill"),
   contributors: byId("contributors"),
@@ -551,6 +554,9 @@ function render() {
   el.comboText.textContent = `${state.maxComboPerfect} 连`;
   el.energyText.textContent = `${state.energy} / 100`;
   el.energyFill.style.width = `${state.energy}%`;
+  el.mobileHeightText.textContent = state.currentLevel;
+  el.mobilePerfectText.textContent = state.perfectCount;
+  el.mobileEnergyText.textContent = state.energy;
   el.boostText.textContent = Date.now() < state.boostUntil
     ? "礼物加成中，Perfect 容错扩大。"
     : "能量越高，移动越稳。";
