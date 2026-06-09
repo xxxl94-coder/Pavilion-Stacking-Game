@@ -613,10 +613,11 @@ h1 {
   .top-bar {
     position: absolute;
     top: max(8px, env(safe-area-inset-top));
-    left: 8px;
-    right: 8px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
     z-index: 8;
-    display: block;
+    display: inline-block;
     pointer-events: none;
   }
 
@@ -630,38 +631,33 @@ h1 {
   }
 
   .status-strip {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    display: block;
   }
 
   .status-strip > div {
     min-width: 0;
-    padding: 6px 8px;
+    padding: 5px 11px;
     border-color: rgba(255, 255, 255, 0.7);
     background: rgba(255, 255, 255, 0.72);
     box-shadow: 0 8px 18px rgba(38, 48, 68, 0.12);
     backdrop-filter: blur(10px);
   }
 
+  .status-strip > div:nth-child(1),
+  .status-strip > div:nth-child(3) {
+    display: none;
+  }
+
   .status-strip span {
-    font-size: 11px;
-  }
-
-  .status-strip strong {
-    font-size: 13px;
-  }
-
-  .status-strip > div:nth-child(1) {
-    flex: 0 0 78px;
+    display: none;
   }
 
   .status-strip > div:nth-child(2) {
-    flex: 0 0 70px;
+    border-radius: 999px;
   }
 
-  .status-strip > div:nth-child(3) {
-    flex: 1 1 auto;
+  .status-strip strong {
+    font-size: 14px;
   }
 
   .content-grid {
@@ -698,12 +694,7 @@ h1 {
   }
 
   .icon-btn {
-    position: absolute;
-    top: 0;
-    right: -60px;
-    width: 46px;
-    min-height: 34px;
-    border-radius: 999px;
+    display: none;
   }
 
   .turn-timer {
@@ -756,26 +747,7 @@ h1 {
   }
 
   .mobile-hud {
-    position: absolute;
-    top: max(98px, calc(env(safe-area-inset-top) + 74px));
-    left: 10px;
-    right: 10px;
-    z-index: 7;
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-    pointer-events: none;
-  }
-
-  .mobile-hud span {
-    padding: 4px 7px;
-    border-radius: 999px;
-    color: #263044;
-    font-size: 11px;
-    font-weight: 900;
-    background: rgba(255, 255, 255, 0.46);
-    box-shadow: 0 4px 12px rgba(38, 48, 68, 0.1);
-    backdrop-filter: blur(8px);
+    display: none;
   }
 
   .side-panel {
@@ -788,9 +760,7 @@ h1 {
     right: 10px;
     bottom: max(10px, env(safe-area-inset-bottom));
     z-index: 9;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
+    display: block;
     padding: 0;
   }
 
@@ -804,9 +774,15 @@ h1 {
 
   #startBtn,
   #dropBtn {
-    grid-column: 1 / -1;
+    width: 100%;
     min-height: 58px;
     font-size: 18px;
+  }
+
+  #likeBtn,
+  #commentBtn,
+  #giftBtn {
+    display: none;
   }
 
   body[data-phase="waiting"] #dropBtn,
@@ -844,7 +820,7 @@ h1 {
   }
 
   .status-strip {
-    gap: 5px;
+    display: block;
   }
 
   .status-strip > div {
@@ -856,14 +832,10 @@ h1 {
   }
 
   .stage-head {
-    top: max(66px, calc(env(safe-area-inset-top) + 42px));
+    top: max(52px, calc(env(safe-area-inset-top) + 28px));
     left: 10px;
-    right: 62px;
+    right: 10px;
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .mobile-hud {
-    top: max(92px, calc(env(safe-area-inset-top) + 68px));
   }
 
   .turn-timer {
@@ -871,21 +843,13 @@ h1 {
     grid-row: auto;
   }
 
-  .icon-btn {
-    right: -52px;
-    width: 40px;
-    min-height: 32px;
-  }
-
   .control-panel {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     left: 8px;
     right: 8px;
-    gap: 7px;
   }
 
   #startBtn,
   #dropBtn {
-    grid-column: span 3;
+    width: 100%;
   }
 }
