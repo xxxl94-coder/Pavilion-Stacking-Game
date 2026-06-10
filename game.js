@@ -13,7 +13,7 @@ const CONFIG = {
     speedIncreasePerLevel: 0.12,
     maxSpeed: 3.15,
     edgePadding: 10,
-    newFloorTopOffset: 82,
+    newFloorTopOffset: 190,
     countdownTickMs: 700,
     dropJudgeDelayMs: 260,
     nextFloorDelayMs: 820,
@@ -668,7 +668,9 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     if (floor === state.currentFloor) classes.push("current");
     const tilt = floor === state.currentFloor ? getHangingSwingAngle() : 0;
     const cableLength = CONFIG.motion.cableLength * scaleY;
-    const rigging = floor === state.currentFloor ? `<span class="crane-line"></span>` : "";
+    const rigging = floor === state.currentFloor && state.phase === "moving"
+      ? `<span class="crane-line"></span>`
+      : "";
     return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg; --cable-length:${cableLength}px">${rigging}</div>`;
 }
 
