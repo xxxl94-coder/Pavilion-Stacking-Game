@@ -31,6 +31,9 @@ const CONFIG = {
     towerSwayOffsetWeight: 1.35,
     towerSwayMs: 1450,
     cableLength: 74,
+    dropSettleMs: 220,
+    cameraImpactPx: 18,
+    cameraImpactMs: 420,
   },
   judgement: {
     perfectRatio: 0.92,
@@ -77,6 +80,7 @@ let autoTimer = 0;
 let turnTimer = 0;
 let boostTimer = 0;
 let audienceTimer = 0;
+let cameraMotionId = 0;
 
 const el = {
   phaseText: byId("phaseText"),
@@ -155,6 +159,7 @@ function createInitialState() {
     turnEndsAt: 0,
     lastQuality: "",
     tapHintDismissed: false,
+    cameraImpactStartedAt: 0,
   };
 }
 
@@ -265,6 +270,7 @@ function dropCurrentFloor() {
   const top = getTopFloor();
   state.currentFloor.bottom = top.bottom + CONFIG.floorHeight;
   render();
+  window.setTimeout(startCameraImpact, CONFIG.motion.dropSettleMs);
   setTimeout(judgeCurrentFloor, CONFIG.gameplay.dropJudgeDelayMs);
 }
 
@@ -362,6 +368,7 @@ function finishGame(success) {
   stopTurnTimer();
   stopAudienceAssist();
   cancelAnimationFrame(rafId);
+  cancelAnimationFrame(cameraMotionId);
   state.phase = "result";
   state.message = success ? "冲顶成功，全场庆祝" : "本局结束，挑战终止";
   if (success) {
@@ -378,6 +385,7 @@ function resetGame() {
   stopAudienceAssist();
   clearTimeout(boostTimer);
   cancelAnimationFrame(rafId);
+  cancelAnimationFrame(cameraMotionId);
   state = createInitialState();
   el.resultModal.classList.add("hidden");
   el.stage.classList.remove("success", "shake");
@@ -671,7 +679,37 @@ function getCameraStep() {
 function getWorldShift() {
   const isMobileLayout = window.matchMedia("(max-width: 980px)").matches;
   if (!isMobileLayout) return 0;
-  return getCameraStep();
+  return getCameraStep() + getCameraImpactOffset();
+}
+
+function startCameraImpact() {
+  if (state.phase !== "dropping" && state.phase !== "judging") return;
+  state.cameraImpactStartedAt = performance.now();
+  runCameraMotion(CONFIG.motion.cameraImpactMs);
+}
+
+function runCameraMotion(durationMs) {
+  cancelAnimationFrame(cameraMotionId);
+  const startedAt = performance.now();
+  const tickCamera = () => {
+    renderTower();
+    if (performance.now() - startedAt < durationMs) {
+      cameraMotionId = requestAnimationFrame(tickCamera);
+    }
+  };
+  cameraMotionId = requestAnimationFrame(tickCamera);
+}
+
+function getCameraImpactOffset() {
+  if (!state.cameraImpactStartedAt) return 0;
+  const elapsed = performance.now() - state.cameraImpactStartedAt;
+  const progress = elapsed / CONFIG.motion.cameraImpactMs;
+  if (progress >= 1) {
+    state.cameraImpactStartedAt = 0;
+    return 0;
+  }
+  const easedPulse = Math.sin(progress * Math.PI) * Math.pow(1 - progress, 0.35);
+  return CONFIG.motion.cameraImpactPx * easedPulse;
 }
 
 function getHangingSwingAngle() {
