@@ -319,7 +319,7 @@ h1 {
 
 .floor.current {
   animation: currentPulse 1.2s ease-in-out infinite;
-  transform-origin: 50% calc(-1 * var(--cable-length, 74px));
+  transform-origin: 50% calc(-1 * var(--cable-length, 118px));
   z-index: 4;
 }
 
@@ -327,8 +327,8 @@ h1 {
   position: absolute;
   left: 50%;
   bottom: calc(100% + 2px);
-  width: 36px;
-  height: var(--cable-length, 74px);
+  width: 40px;
+  height: var(--cable-length, 118px);
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -338,11 +338,13 @@ h1 {
   position: absolute;
   left: 50%;
   top: 0;
-  width: 3px;
+  width: 4px;
   height: calc(100% - 18px);
   border-radius: 999px;
-  background: linear-gradient(180deg, #182235, #42516a);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+  background: linear-gradient(180deg, #101827, #334155 58%, #111827);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.34),
+    0 6px 12px rgba(38, 48, 68, 0.16);
   transform: translateX(-50%);
 }
 
