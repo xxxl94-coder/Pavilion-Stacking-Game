@@ -27,8 +27,8 @@ const CONFIG = {
     hangingSwingMs: 980,
     towerSwayStartLevel: 4,
     towerSwayBaseDeg: 0.18,
-    towerSwayMaxDeg: 2.4,
-    towerSwayOffsetWeight: 1.35,
+    towerSwayMaxDeg: 2.9,
+    towerSwayOffsetWeight: 1.7,
     towerSwayMs: 1450,
     cableLength: 236,
     dropSettleMs: 90,
@@ -43,6 +43,9 @@ const CONFIG = {
     giftPerfectReduction: 0.04,
     minSuccessWidth: 32,
     scrapMinWidth: 5,
+    perfectCenterCorrection: 0.86,
+    goodCenterCorrection: 0.35,
+    normalCenterCorrection: 0,
   },
   energy: {
     max: 100,
@@ -212,7 +215,7 @@ function startGame() {
 
 function spawnCurrentFloor() {
   const previous = getTopFloor();
-  const width = Math.max(previous.width, CONFIG.minWidth);
+  const width = Math.max(CONFIG.baseWidth, CONFIG.minWidth);
   const fromLeft = state.currentLevel % 2 === 0;
   const worldShift = getWorldShift();
   state.currentFloor = {
@@ -295,13 +298,10 @@ function judgeCurrentFloor() {
     return;
   }
 
-  const scrapLeftWidth = Math.max(0, overlapStart - current.x);
-  const scrapRightWidth = Math.max(0, current.x + current.width - overlapEnd);
-  if (scrapLeftWidth > CONFIG.judgement.scrapMinWidth) addScrap(current.x, scrapLeftWidth, current.bottom);
-  if (scrapRightWidth > CONFIG.judgement.scrapMinWidth) addScrap(overlapEnd, scrapRightWidth, current.bottom);
-
-  current.x = overlapStart;
-  current.width = overlapWidth;
+  const previousCenter = previous.x + previous.width / 2;
+  const currentCenter = current.x + current.width / 2;
+  const correction = getCenterCorrection(quality);
+  current.x += (previousCenter - currentCenter) * correction;
   current.quality = quality;
   state.floors.push(current);
   state.currentFloor = null;
@@ -503,6 +503,12 @@ function getPerfectThreshold() {
   const energyReduction = energyBonus * CONFIG.judgement.fullEnergyPerfectReduction;
   const giftReduction = Date.now() < state.boostUntil ? CONFIG.judgement.giftPerfectReduction : 0;
   return Math.max(0.78, CONFIG.judgement.perfectRatio - energyReduction - giftReduction);
+}
+
+function getCenterCorrection(quality) {
+  if (quality === "perfect") return CONFIG.judgement.perfectCenterCorrection;
+  if (quality === "good") return CONFIG.judgement.goodCenterCorrection;
+  return CONFIG.judgement.normalCenterCorrection;
 }
 
 function getTopFloor() {
