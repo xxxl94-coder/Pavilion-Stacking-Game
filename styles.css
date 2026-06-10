@@ -319,7 +319,7 @@ h1 {
 
 .floor.current {
   animation: currentPulse 1.2s ease-in-out infinite;
-  transform-origin: 50% calc(-1 * var(--cable-length, 118px));
+  transform-origin: 50% calc(-1 * var(--cable-length, 236px));
   z-index: 4;
 }
 
@@ -328,7 +328,7 @@ h1 {
   left: 50%;
   bottom: calc(100% + 2px);
   width: 40px;
-  height: var(--cable-length, 118px);
+  height: var(--cable-length, 236px);
   transform: translateX(-50%);
   pointer-events: none;
 }

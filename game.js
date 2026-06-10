@@ -30,7 +30,7 @@ const CONFIG = {
     towerSwayMaxDeg: 2.4,
     towerSwayOffsetWeight: 1.35,
     towerSwayMs: 1450,
-    cableLength: 118,
+    cableLength: 236,
     dropSettleMs: 90,
     cameraImpactPx: 16,
     cameraImpactMs: 520,
