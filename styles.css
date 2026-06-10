@@ -315,6 +315,47 @@ h1 {
 
 .floor.current {
   animation: currentPulse 1.2s ease-in-out infinite;
+  transform-origin: 50% calc(-1 * var(--cable-length, 74px));
+  z-index: 4;
+}
+
+.crane-line {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 2px);
+  width: 36px;
+  height: var(--cable-length, 74px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.crane-line::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: calc(100% - 18px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #182235, #42516a);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+  transform: translateX(-50%);
+}
+
+.crane-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 18px;
+  height: 20px;
+  border-right: 4px solid #263044;
+  border-bottom: 4px solid #263044;
+  border-radius: 0 0 12px 0;
+  box-shadow:
+    0 -7px 0 -2px #ffc857,
+    0 4px 8px rgba(38, 48, 68, 0.18);
+  transform: translateX(-46%) rotate(18deg);
 }
 
 .floor.perfect {

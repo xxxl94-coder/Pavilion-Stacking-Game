@@ -30,6 +30,7 @@ const CONFIG = {
     towerSwayMaxDeg: 2.4,
     towerSwayOffsetWeight: 1.35,
     towerSwayMs: 1450,
+    cableLength: 74,
   },
   judgement: {
     perfectRatio: 0.92,
@@ -649,7 +650,9 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     if (floor.quality) classes.push(floor.quality);
     if (floor === state.currentFloor) classes.push("current");
     const tilt = floor === state.currentFloor ? getHangingSwingAngle() : 0;
-    return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg"></div>`;
+    const cableLength = CONFIG.motion.cableLength * scaleY;
+    const rigging = floor === state.currentFloor ? `<span class="crane-line"></span>` : "";
+    return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg; --cable-length:${cableLength}px">${rigging}</div>`;
 }
 
 function getCameraStep() {
