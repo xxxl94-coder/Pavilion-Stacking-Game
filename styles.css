@@ -291,8 +291,8 @@ h1 {
   border: 3px solid rgba(214, 151, 36, 0.8);
   border-radius: 7px 7px 5px 5px;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.72), transparent 14%, transparent 86%, rgba(196, 111, 28, 0.18)),
-    linear-gradient(180deg, #fff8d9 0%, #ffe7a2 52%, #f5b95a 100%);
+    linear-gradient(100deg, rgba(255, 255, 255, 0.72), transparent 23%, transparent 78%, rgba(159, 87, 22, 0.18)),
+    linear-gradient(180deg, #fff8df 0%, #ffe9ae 50%, #f4b85b 100%);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.86),
     inset 0 -5px 0 rgba(194, 108, 29, 0.2),
@@ -310,11 +310,15 @@ h1 {
 .floor::before {
   content: "";
   position: absolute;
-  inset: 8px 14px 7px;
+  inset: -6px 12px auto;
+  height: 8px;
+  border-radius: 9px 9px 3px 3px;
   background:
-    repeating-radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.78) 0 42%, rgba(255, 199, 87, 0.62) 44% 55%, transparent 57% 100%) 0 0 / 35px 100%,
-    repeating-linear-gradient(90deg, transparent 0 6px, rgba(181, 107, 26, 0.35) 6px 9px, transparent 9px 35px);
-  opacity: 0.92;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 220, 133, 0.92)),
+    linear-gradient(90deg, #f8d06f, #fff2b8 48%, #d78a2c);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 8px rgba(117, 77, 18, 0.14);
 }
 
 .floor::after {
@@ -329,12 +333,76 @@ h1 {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
 }
 
+.floor-roof,
+.floor-face,
+.floor-trim {
+  position: absolute;
+  pointer-events: none;
+}
+
+.floor-roof {
+  left: 8px;
+  right: 8px;
+  top: 3px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d7972e, #fff2ae 48%, #d18128);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.floor-face {
+  left: 14px;
+  right: 14px;
+  top: 9px;
+  bottom: 7px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+  align-items: stretch;
+}
+
+.arch {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(199, 129, 34, 0.72);
+  border-bottom-width: 3px;
+  border-radius: 999px 999px 4px 4px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.86), transparent 34%),
+    linear-gradient(180deg, #fff9df 0%, #ffd87b 56%, #e69532 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.62),
+    0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.arch::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: 18%;
+  height: 72%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  transform: translateX(-50%);
+}
+
+.floor-trim {
+  left: 9px;
+  right: 9px;
+  bottom: 2px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c27627, #ffd36d 45%, #ae6523);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46);
+}
+
 .floor.base {
   height: 42px;
   border-color: rgba(177, 111, 32, 0.86);
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.4), transparent 22%, transparent 78%, rgba(111, 73, 28, 0.18)),
-    linear-gradient(180deg, #f5d992 0%, #e2a94e 55%, #b96f2a 100%);
+    linear-gradient(100deg, rgba(255, 255, 255, 0.42), transparent 24%, transparent 78%, rgba(111, 73, 28, 0.2)),
+    linear-gradient(180deg, #f7dda2 0%, #e4ad50 55%, #b86b28 100%);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.74),
     inset 0 -7px 0 rgba(112, 75, 31, 0.22),
@@ -397,14 +465,14 @@ h1 {
 
 .floor.good {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.72), transparent 14%, transparent 86%, rgba(196, 111, 28, 0.16)),
+    linear-gradient(100deg, rgba(255, 255, 255, 0.72), transparent 23%, transparent 78%, rgba(196, 111, 28, 0.16)),
     linear-gradient(180deg, #fff9de 0%, #f8df8f 48%, #eeb45a 100%);
 }
 
 .floor.normal {
   --floor-tilt: -1.4deg;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.56), transparent 14%, transparent 86%, rgba(196, 111, 28, 0.18)),
+    linear-gradient(100deg, rgba(255, 255, 255, 0.56), transparent 23%, transparent 78%, rgba(196, 111, 28, 0.18)),
     linear-gradient(180deg, #fff2c4 0%, #e9bd6f 52%, #c98a43 100%);
 }
 

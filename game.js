@@ -677,7 +677,18 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     const rigging = floor === state.currentFloor && state.phase === "moving"
       ? `<span class="crane-line"></span>`
       : "";
-    return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg; --cable-length:${cableLength}px">${rigging}</div>`;
+    const facade = `
+      <span class="floor-roof"></span>
+      <span class="floor-face" aria-hidden="true">
+        <span class="arch"></span>
+        <span class="arch"></span>
+        <span class="arch"></span>
+        <span class="arch"></span>
+        <span class="arch"></span>
+      </span>
+      <span class="floor-trim"></span>
+    `;
+    return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg; --cable-length:${cableLength}px">${rigging}${facade}</div>`;
 }
 
 function getCameraStep() {
