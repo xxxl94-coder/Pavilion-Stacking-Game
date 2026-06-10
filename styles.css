@@ -788,7 +788,7 @@ h1 {
     right: 10px;
     bottom: max(54px, calc(env(safe-area-inset-bottom) + 38px));
     z-index: 9;
-    display: block;
+    display: none;
     padding: 0;
   }
 
@@ -807,37 +807,16 @@ h1 {
     font-size: 18px;
   }
 
+  body[data-phase="waiting"] .control-panel,
+  body[data-phase="result"] .control-panel {
+    display: block;
+  }
+
   #likeBtn,
   #commentBtn,
   #giftBtn,
-  #dropBtn {
-    display: none;
-  }
-
-  body[data-phase="waiting"] .control-panel,
-  body[data-phase="countdown"] .control-panel,
-  body[data-phase="dropping"] .control-panel,
-  body[data-phase="judging"] .control-panel,
-  body[data-phase="moving"] .control-panel,
-  body[data-phase="result"] .control-panel {
-    display: none;
-  }
-
-  body[data-phase="waiting"] #dropBtn,
-  body[data-phase="countdown"] #dropBtn,
-  body[data-phase="dropping"] #dropBtn,
-  body[data-phase="judging"] #dropBtn,
-  body[data-phase="dropping"] #startBtn,
-  body[data-phase="judging"] #startBtn,
-  body[data-phase="moving"] #startBtn,
-  body[data-phase="result"] #dropBtn {
-    display: none;
-  }
-
-  #resetBtn {
-    display: none;
-  }
-
+  #dropBtn,
+  #resetBtn,
   #autoBtn {
     display: none;
   }
