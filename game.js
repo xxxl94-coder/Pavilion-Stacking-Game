@@ -344,9 +344,18 @@ function handleTimeout() {
   if (state.phase !== "moving" || !state.currentFloor) return;
   stopTurnTimer();
   cancelAnimationFrame(rafId);
+  const timedOutFloor = state.currentFloor;
+  timedOutFloor.quality = "timeout-piece";
+  state.scraps.push({ ...timedOutFloor, id: `timeout-${Date.now()}` });
+  state.currentFloor = null;
+  state.energy = 0;
+  state.comboPerfect = 0;
+  state.lives -= 1;
+  state.lastQuality = "fail";
   state.message = "超时未落层，楼层失控";
   showFloating("超时！", 50, 35);
-  handleFail(state.currentFloor);
+  render();
+  setTimeout(() => finishGame(false), 820);
 }
 
 function finishGame(success) {

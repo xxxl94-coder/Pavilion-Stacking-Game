@@ -381,6 +381,11 @@ h1 {
   animation: fallAway 900ms ease-in forwards;
 }
 
+.floor.timeout-piece {
+  opacity: 0.82;
+  animation: timeoutDrift 820ms ease-in forwards;
+}
+
 .workers {
   position: absolute;
   left: 28px;
@@ -633,6 +638,13 @@ h1 {
 @keyframes fallAway {
   to {
     transform: translateY(240px) rotate(24deg);
+    opacity: 0;
+  }
+}
+
+@keyframes timeoutDrift {
+  to {
+    transform: translate(48px, -90px) rotate(10deg);
     opacity: 0;
   }
 }
