@@ -266,6 +266,14 @@ h1 {
   position: absolute;
   inset: 0;
   z-index: 2;
+  pointer-events: none;
+}
+
+.settled-stack {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  will-change: transform;
 }
 
 .mobile-hud {
@@ -286,6 +294,9 @@ h1 {
     linear-gradient(135deg, #4a90e2, #42c7a4);
   box-shadow: 0 8px 18px rgba(38, 48, 68, 0.16);
   transition: left 0.18s ease, bottom 0.22s ease, width 0.2s ease, transform 0.2s ease;
+  transform: rotate(var(--floor-tilt, 0deg));
+  transform-origin: 50% 72%;
+  will-change: transform, left, bottom;
 }
 
 .floor::before {
@@ -318,10 +329,10 @@ h1 {
 }
 
 .floor.normal {
+  --floor-tilt: -1.4deg;
   background:
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.28) 0 16px, transparent 16px 36px),
     linear-gradient(135deg, #ffb84d, #ff7666);
-  transform: rotate(-1.4deg);
 }
 
 .floor.fail-piece {

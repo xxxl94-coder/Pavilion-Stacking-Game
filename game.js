@@ -21,6 +21,16 @@ const CONFIG = {
     autoDropSafetyMs: 700,
     cameraStepPerFloor: 34,
   },
+  motion: {
+    hangingSwingBaseDeg: 1.6,
+    hangingSwingMaxDeg: 4.8,
+    hangingSwingMs: 620,
+    towerSwayStartLevel: 4,
+    towerSwayBaseDeg: 0.18,
+    towerSwayMaxDeg: 2.4,
+    towerSwayOffsetWeight: 1.35,
+    towerSwayMs: 1450,
+  },
   judgement: {
     perfectRatio: 0.92,
     goodRatio: 0.68,
@@ -611,14 +621,25 @@ function renderTower() {
   const stageRect = el.stage.getBoundingClientRect();
   const scaleX = stageRect.width / CONFIG.stageWidth;
   const scaleY = stageRect.height / CONFIG.stageHeight;
-  const allFloors = [...state.floors, ...state.scraps];
-  if (state.currentFloor) allFloors.push(state.currentFloor);
+  const settledFloors = [...state.floors, ...state.scraps];
   const worldShift = getWorldShift();
   const cameraStep = getCameraStep();
+  const towerSway = getTowerSway();
   el.stage.style.setProperty("--world-shift-px", `${worldShift * scaleY}px`);
   el.stage.style.setProperty("--ground-actor-opacity", `${Math.max(0, 1 - cameraStep / 120)}`);
 
-  el.tower.innerHTML = allFloors.map((floor) => {
+  const settledHtml = settledFloors.map((floor) => renderFloor(floor, scaleX, scaleY, worldShift)).join("");
+  const currentHtml = state.currentFloor ? renderFloor(state.currentFloor, scaleX, scaleY, worldShift) : "";
+
+  el.tower.innerHTML = `
+    <div class="settled-stack" style="transform: translateX(${towerSway.x}px) rotate(${towerSway.angle}deg)">
+      ${settledHtml}
+    </div>
+    ${currentHtml}
+  `;
+}
+
+function renderFloor(floor, scaleX, scaleY, worldShift) {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
     const bottom = (floor.bottom - worldShift) * scaleY;
@@ -627,8 +648,8 @@ function renderTower() {
     if (floor.level === 0) classes.push("base");
     if (floor.quality) classes.push(floor.quality);
     if (floor === state.currentFloor) classes.push("current");
-    return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px"></div>`;
-  }).join("");
+    const tilt = floor === state.currentFloor ? getHangingSwingAngle() : 0;
+    return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg"></div>`;
 }
 
 function getCameraStep() {
@@ -639,6 +660,45 @@ function getWorldShift() {
   const isMobileLayout = window.matchMedia("(max-width: 980px)").matches;
   if (!isMobileLayout) return 0;
   return getCameraStep();
+}
+
+function getHangingSwingAngle() {
+  if (state.phase !== "moving" || !state.currentFloor) return 0;
+  const speedRatio = Math.min(1, state.speed / CONFIG.gameplay.maxSpeed);
+  const amplitude = CONFIG.motion.hangingSwingBaseDeg
+    + (CONFIG.motion.hangingSwingMaxDeg - CONFIG.motion.hangingSwingBaseDeg) * speedRatio;
+  const time = performance.now() / CONFIG.motion.hangingSwingMs;
+  return Math.sin(time * Math.PI * 2) * amplitude;
+}
+
+function getTowerSway() {
+  const active = state.phase === "moving" || state.phase === "dropping" || state.phase === "judging";
+  if (!active || state.currentLevel < CONFIG.motion.towerSwayStartLevel) {
+    return { angle: 0, x: 0 };
+  }
+
+  const floors = state.floors.filter((floor) => floor.level > 0);
+  if (!floors.length) return { angle: 0, x: 0 };
+
+  const offsetTotal = floors.reduce((total, floor, index) => {
+    const previous = index === 0 ? state.floors[0] : floors[index - 1];
+    const currentCenter = floor.x + floor.width / 2;
+    const previousCenter = previous.x + previous.width / 2;
+    return total + Math.abs(currentCenter - previousCenter);
+  }, 0);
+  const offsetRatio = Math.min(1, offsetTotal / Math.max(1, floors.length * CONFIG.baseWidth * 0.24));
+  const heightRatio = Math.min(1, (state.currentLevel - CONFIG.motion.towerSwayStartLevel + 1) / 12);
+  const amplitude = Math.min(
+    CONFIG.motion.towerSwayMaxDeg,
+    CONFIG.motion.towerSwayBaseDeg
+      + heightRatio * 0.9
+      + offsetRatio * CONFIG.motion.towerSwayOffsetWeight,
+  );
+  const wave = Math.sin((performance.now() / CONFIG.motion.towerSwayMs) * Math.PI * 2);
+  return {
+    angle: wave * amplitude,
+    x: wave * amplitude * 0.7,
+  };
 }
 
 function renderContributors() {
