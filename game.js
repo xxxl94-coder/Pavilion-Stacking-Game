@@ -3,7 +3,7 @@ const CONFIG = {
   lives: 1,
   stageWidth: 720,
   stageHeight: 480,
-  floorHeight: 68,
+  floorHeight: 92,
   baseWidth: 260,
   baseBottom: 76,
   minWidth: 36,
@@ -19,7 +19,7 @@ const CONFIG = {
     nextFloorDelayMs: 820,
     turnTimeMs: 4200,
     autoDropSafetyMs: 700,
-    cameraStepPerFloor: 58,
+    cameraStepPerFloor: 78,
   },
   motion: {
     hangingSwingBaseDeg: 1.2,
