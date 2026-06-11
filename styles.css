@@ -368,6 +368,7 @@ h1 {
     0 6px 9px rgba(85, 57, 23, 0.1);
 }
 
+.base-png,
 .floor-png,
 .floor-roof,
 .floor-face,
@@ -379,6 +380,7 @@ h1 {
   pointer-events: none;
 }
 
+.base-png,
 .floor-png {
   display: none;
 }
@@ -516,60 +518,32 @@ h1 {
 }
 
 .floor.base {
-  height: 42px;
-  border-color: rgba(177, 111, 32, 0.86);
-  border-radius: 8px 8px 6px 6px;
-  background:
-    radial-gradient(ellipse at 50% -20%, rgba(255, 255, 255, 0.62) 0 36%, transparent 60%),
-    repeating-linear-gradient(90deg, rgba(95, 60, 24, 0.14) 0 2px, transparent 2px 28px),
-    linear-gradient(100deg, rgba(255, 255, 255, 0.46), transparent 24%, transparent 78%, rgba(111, 73, 28, 0.22)),
-    linear-gradient(180deg, #f7dda2 0%, #dfa64b 55%, #a95f24 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.74),
-    inset 0 -9px 0 rgba(112, 75, 31, 0.24),
-    0 4px 0 rgba(116, 73, 25, 0.18),
-    0 13px 24px rgba(105, 75, 22, 0.24);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.floor.base::before {
-  inset: -12px 4px auto;
-  height: 14px;
-  border-radius: 14px 14px 4px 4px;
-  background:
-    linear-gradient(180deg, rgba(255, 247, 205, 0.96), rgba(226, 154, 58, 0.94)),
-    linear-gradient(90deg, #b96923, #fff1ae 50%, #a85c20);
+.floor.base::before,
+.floor.base::after,
+.floor.base .floor-roof,
+.floor.base .floor-face,
+.floor.base .floor-pillars,
+.floor.base .floor-trim,
+.floor.base .floor-caps,
+.floor.base .floor-png,
+.floor.base .floor-shadow {
+  display: none;
 }
 
-.floor.base::after {
-  left: -8px;
-  right: -8px;
-  bottom: -13px;
-  height: 13px;
-  border-radius: 0 0 8px 8px;
-  background:
-    repeating-linear-gradient(90deg, rgba(77, 49, 22, 0.26) 0 2px, transparent 2px 30px),
-    linear-gradient(180deg, #e7ad55, #875124);
-}
-
-.floor.base .floor-face {
-  top: 12px;
-  bottom: 9px;
-}
-
-.floor.base .arch {
-  border-radius: 8px 8px 3px 3px;
-  background:
-    radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.72), transparent 30%),
-    linear-gradient(180deg, #f8d989 0%, #c88637 100%);
-}
-
-.floor.base .floor-caps {
-  inset: 5px 8px 7px;
-  border-left-width: 7px;
-  border-right-width: 7px;
-  background:
-    linear-gradient(90deg, transparent 0 42%, rgba(99, 59, 23, 0.3) 42% 58%, transparent 58%),
-    linear-gradient(180deg, transparent 0 56%, rgba(255, 246, 192, 0.18) 56% 100%);
+.floor.base .base-png {
+  display: block;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./assets/base-tight.png") center bottom / 100% 100% no-repeat;
+  transform: translateX(-50%);
 }
 
 .floor.current {

@@ -4,6 +4,7 @@ const CONFIG = {
   stageWidth: 720,
   stageHeight: 480,
   floorHeight: 34,
+  baseHeight: 78,
   baseWidth: 260,
   baseBottom: 76,
   minWidth: 36,
@@ -271,7 +272,7 @@ function dropCurrentFloor() {
   state.phase = "dropping";
   state.message = "楼层下落中";
   const top = getTopFloor();
-  state.currentFloor.bottom = top.bottom + CONFIG.floorHeight;
+  state.currentFloor.bottom = top.bottom + getSupportHeight(top);
   render();
   window.setTimeout(startCameraImpact, CONFIG.motion.dropSettleMs);
   setTimeout(judgeCurrentFloor, CONFIG.gameplay.dropJudgeDelayMs);
@@ -516,6 +517,10 @@ function getTopFloor() {
   return state.floors[state.floors.length - 1];
 }
 
+function getSupportHeight(floor) {
+  return floor.level === 0 ? CONFIG.baseHeight : CONFIG.floorHeight;
+}
+
 function addScrap(x, width, bottom) {
   state.scraps.push({
     id: `scrap-${Date.now()}-${Math.random()}`,
@@ -680,7 +685,7 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
     const bottom = (floor.bottom - worldShift) * scaleY;
-    const height = (floor.level === 0 ? 42 : CONFIG.floorHeight) * scaleY;
+    const height = getSupportHeight(floor) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
     if (floor.quality) classes.push(floor.quality);
@@ -692,6 +697,7 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
       : "";
     const facade = `
       <span class="floor-shadow"></span>
+      <span class="base-png" aria-hidden="true"></span>
       <span class="floor-png" aria-hidden="true"></span>
       <span class="floor-roof"></span>
       <span class="floor-face" aria-hidden="true">
