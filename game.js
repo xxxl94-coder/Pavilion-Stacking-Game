@@ -328,6 +328,7 @@ function judgeCurrentFloor() {
 
   maybeMilestone();
   render();
+  showLandingEffect(current, quality);
   setTimeout(spawnCurrentFloor, CONFIG.gameplay.nextFloorDelayMs);
 }
 
@@ -570,6 +571,18 @@ function showFloating(text, xPercent, yPercent) {
   setTimeout(() => node.remove(), 1200);
 }
 
+function showLandingEffect(floor, quality) {
+  const worldShift = getWorldShift();
+  const xPercent = ((floor.x + floor.width / 2) / CONFIG.stageWidth) * 100;
+  const yPercent = 100 - ((floor.bottom - worldShift) / CONFIG.stageHeight) * 100;
+  const node = document.createElement("div");
+  node.className = `landing-effect ${quality}`;
+  node.style.left = `${Math.max(10, Math.min(90, xPercent))}%`;
+  node.style.top = `${Math.max(14, Math.min(86, yPercent))}%`;
+  el.toastLayer.appendChild(node);
+  setTimeout(() => node.remove(), 900);
+}
+
 function spawnParticles(char, count) {
   for (let i = 0; i < count; i += 1) {
     const node = document.createElement("div");
@@ -675,9 +688,10 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     const tilt = floor === state.currentFloor ? getHangingSwingAngle() : 0;
     const cableLength = CONFIG.motion.cableLength * scaleY;
     const rigging = floor === state.currentFloor && state.phase === "moving"
-      ? `<span class="crane-line"></span>`
+      ? `<span class="crane-line"><span class="crane-trolley"></span><span class="crane-hook"></span></span>`
       : "";
     const facade = `
+      <span class="floor-shadow"></span>
       <span class="floor-roof"></span>
       <span class="floor-face" aria-hidden="true">
         <span class="arch"></span>
@@ -686,7 +700,9 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
         <span class="arch"></span>
         <span class="arch"></span>
       </span>
+      <span class="floor-pillars" aria-hidden="true"></span>
       <span class="floor-trim"></span>
+      <span class="floor-caps" aria-hidden="true"></span>
     `;
     return `<div class="${classes.join(" ")}" style="left:${left}px; bottom:${bottom}px; width:${width}px; height:${height}px; --floor-tilt:${tilt}deg; --cable-length:${cableLength}px">${rigging}${facade}</div>`;
 }
