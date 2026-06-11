@@ -368,6 +368,7 @@ h1 {
     0 6px 9px rgba(85, 57, 23, 0.1);
 }
 
+.floor-png,
 .floor-roof,
 .floor-face,
 .floor-pillars,
@@ -376,6 +377,38 @@ h1 {
 .floor-shadow {
   position: absolute;
   pointer-events: none;
+}
+
+.floor-png {
+  display: none;
+}
+
+.floor:not(.base) {
+  border-color: transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.floor:not(.base)::before,
+.floor:not(.base)::after,
+.floor:not(.base) .floor-roof,
+.floor:not(.base) .floor-face,
+.floor:not(.base) .floor-pillars,
+.floor:not(.base) .floor-trim,
+.floor:not(.base) .floor-caps {
+  display: none;
+}
+
+.floor:not(.base) .floor-png {
+  display: block;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: auto;
+  aspect-ratio: 280 / 100;
+  background: url("./assets/floor.png") center bottom / 100% 100% no-repeat;
+  filter: drop-shadow(0 8px 10px rgba(92, 62, 23, 0.18));
 }
 
 .floor-shadow {
@@ -663,6 +696,37 @@ h1 {
     linear-gradient(100deg, rgba(255, 255, 255, 0.56), transparent 23%, transparent 78%, rgba(196, 111, 28, 0.18)),
     repeating-linear-gradient(90deg, rgba(116, 70, 21, 0.08) 0 2px, transparent 2px 18px),
     linear-gradient(180deg, #fff2c4 0%, #e9bd6f 52%, #c98a43 100%);
+}
+
+.floor:not(.base).perfect,
+.floor:not(.base).good,
+.floor:not(.base).normal {
+  border-color: transparent;
+  background: transparent;
+}
+
+.floor:not(.base).perfect {
+  box-shadow: none;
+}
+
+.floor:not(.base).perfect .floor-png {
+  filter:
+    drop-shadow(0 0 10px rgba(255, 221, 101, 0.64))
+    drop-shadow(0 8px 10px rgba(92, 62, 23, 0.18))
+    brightness(1.08);
+}
+
+.floor:not(.base).good .floor-png {
+  filter:
+    drop-shadow(0 0 6px rgba(255, 221, 101, 0.32))
+    drop-shadow(0 8px 10px rgba(92, 62, 23, 0.18))
+    brightness(1.03);
+}
+
+.floor:not(.base).normal .floor-png {
+  filter:
+    drop-shadow(0 9px 11px rgba(92, 62, 23, 0.22))
+    saturate(0.94);
 }
 
 .floor.fail-piece {

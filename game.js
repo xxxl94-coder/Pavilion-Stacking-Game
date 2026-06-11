@@ -3,7 +3,7 @@ const CONFIG = {
   lives: 1,
   stageWidth: 720,
   stageHeight: 480,
-  floorHeight: 34,
+  floorHeight: 68,
   baseWidth: 260,
   baseBottom: 76,
   minWidth: 36,
@@ -19,7 +19,7 @@ const CONFIG = {
     nextFloorDelayMs: 820,
     turnTimeMs: 4200,
     autoDropSafetyMs: 700,
-    cameraStepPerFloor: 34,
+    cameraStepPerFloor: 58,
   },
   motion: {
     hangingSwingBaseDeg: 1.2,
@@ -680,7 +680,7 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
     const bottom = (floor.bottom - worldShift) * scaleY;
-    const height = (floor.level === 0 ? 42 : CONFIG.floorHeight) * scaleY;
+    const height = CONFIG.floorHeight * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
     if (floor.quality) classes.push(floor.quality);
@@ -692,6 +692,7 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
       : "";
     const facade = `
       <span class="floor-shadow"></span>
+      <span class="floor-png" aria-hidden="true"></span>
       <span class="floor-roof"></span>
       <span class="floor-face" aria-hidden="true">
         <span class="arch"></span>
