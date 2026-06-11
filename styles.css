@@ -403,12 +403,17 @@ h1 {
 .floor:not(.base) .floor-png {
   display: block;
   left: 50%;
-  bottom: -11%;
-  width: 138%;
-  height: 124%;
-  background: url("./assets/floor.png") center bottom / 100% 100% no-repeat;
-  filter: drop-shadow(0 8px 10px rgba(92, 62, 23, 0.18));
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./assets/floor-tight.png") center bottom / 100% 100% no-repeat;
+  filter: none;
   transform: translateX(-50%);
+}
+
+.floor:not(.base) .floor-shadow,
+.floor.current .floor-shadow {
+  display: none;
 }
 
 .floor-shadow {
@@ -712,20 +717,17 @@ h1 {
 .floor:not(.base).perfect .floor-png {
   filter:
     drop-shadow(0 0 10px rgba(255, 221, 101, 0.64))
-    drop-shadow(0 8px 10px rgba(92, 62, 23, 0.18))
     brightness(1.08);
 }
 
 .floor:not(.base).good .floor-png {
   filter:
     drop-shadow(0 0 6px rgba(255, 221, 101, 0.32))
-    drop-shadow(0 8px 10px rgba(92, 62, 23, 0.18))
     brightness(1.03);
 }
 
 .floor:not(.base).normal .floor-png {
   filter:
-    drop-shadow(0 9px 11px rgba(92, 62, 23, 0.22))
     saturate(0.94);
 }
 
