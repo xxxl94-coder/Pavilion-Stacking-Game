@@ -216,11 +216,8 @@ h1 {
   border-radius: 8px;
   border: 1px solid var(--line);
   background:
-    radial-gradient(circle at 18% 30%, rgba(255, 255, 255, 0.86) 0 5%, transparent 12%),
-    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.58) 0 6%, transparent 15%),
-    radial-gradient(ellipse at 50% 88%, rgba(255, 239, 154, 0.24) 0 22%, transparent 48%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0)),
-    linear-gradient(160deg, #78c8f1 0%, #bcecf0 40%, #dff2b8 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
+    url("./assets/park-bg.webp") center center / cover no-repeat;
 }
 
 .stage::before {
@@ -258,6 +255,11 @@ h1 {
   border-top: 4px solid rgba(38, 48, 68, 0.1);
 }
 
+.stage::before,
+.stage::after {
+  display: none;
+}
+
 .aurora {
   position: absolute;
   inset: 0;
@@ -265,6 +267,7 @@ h1 {
   background:
     linear-gradient(100deg, transparent 18%, rgba(255, 255, 255, 0.34) 28%, transparent 42%),
     linear-gradient(76deg, transparent 55%, rgba(255, 118, 102, 0.2) 62%, transparent 74%);
+  opacity: 0.26;
   animation: shine 8s linear infinite;
   pointer-events: none;
 }
@@ -277,7 +280,7 @@ h1 {
   height: 560px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.04) 68%, rgba(255, 255, 255, 0));
   clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
-  opacity: 0.52;
+  opacity: 0.2;
 }
 
 .spotlight-left {
@@ -1192,10 +1195,8 @@ h1 {
     border: 0;
     border-radius: 0;
     background:
-      radial-gradient(circle at 18% 78%, rgba(184, 234, 96, 0.28) 0 14%, transparent 30%),
-      radial-gradient(circle at 84% 88%, rgba(111, 206, 87, 0.22) 0 16%, transparent 34%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
-      linear-gradient(180deg, #75bdf7 0%, #9dddea 48%, #d8f3c5 100%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
+      url("./assets/park-bg.webp") center center / cover no-repeat;
   }
 
   .stage::after {
