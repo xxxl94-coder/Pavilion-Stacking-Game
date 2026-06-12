@@ -540,10 +540,15 @@ h1 {
   display: block;
   left: 50%;
   bottom: 0;
-  width: 132%;
+  width: 138%;
   height: 100%;
   background: url("./assets/base-tight.png") center bottom / 100% 100% no-repeat;
+  filter: drop-shadow(0 7px 8px rgba(88, 58, 24, 0.18));
   transform: translateX(-50%);
+}
+
+.floor:not(.base):not(.current) .floor-png {
+  filter: drop-shadow(0 2px 2px rgba(95, 62, 25, 0.14));
 }
 
 .floor.current {
@@ -692,12 +697,14 @@ h1 {
 .floor:not(.base).perfect .floor-png {
   filter:
     drop-shadow(0 0 10px rgba(255, 221, 101, 0.64))
+    drop-shadow(0 2px 2px rgba(95, 62, 25, 0.12))
     brightness(1.08);
 }
 
 .floor:not(.base).good .floor-png {
   filter:
     drop-shadow(0 0 6px rgba(255, 221, 101, 0.32))
+    drop-shadow(0 2px 2px rgba(95, 62, 25, 0.12))
     brightness(1.03);
 }
 
