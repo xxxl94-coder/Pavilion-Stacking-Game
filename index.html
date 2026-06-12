@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>展馆叠叠乐</title>
-    <link rel="preload" href="./assets/park-bg.webp" as="image" />
+    <link rel="preload" href="./assets/sky-bg.webp" as="image" />
+    <link rel="preload" href="./assets/ground-plane.webp" as="image" />
     <link rel="preload" href="./assets/floor-tight.png" as="image" />
     <link rel="preload" href="./assets/base-tight.png" as="image" />
     <link rel="stylesheet" href="./styles.css" />
@@ -49,6 +50,8 @@
               <button class="icon-btn" id="soundBtn" type="button" title="切换氛围">♪</button>
             </div>
             <div class="stage" id="stage">
+              <div class="scene-sky" aria-hidden="true"></div>
+              <div class="scene-ground" aria-hidden="true"></div>
               <div class="aurora"></div>
               <div class="spotlight spotlight-left"></div>
               <div class="spotlight spotlight-right"></div>
