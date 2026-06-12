@@ -26,9 +26,9 @@ const CONFIG = {
   motion: {
     hangingSwingBaseDeg: 1.7,
     hangingSwingMaxDeg: 5.0,
-    hangingSwingMs: 1080,
-    hangingBobBasePx: 6,
-    hangingBobMaxPx: 12,
+    hangingSwingMs: 1650,
+    hangingBobBasePx: 5,
+    hangingBobMaxPx: 10,
     towerSwayStartLevel: 2,
     towerSwayFullLevel: 8,
     towerSwayBaseDeg: 0.08,
