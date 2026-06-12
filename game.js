@@ -24,9 +24,9 @@ const CONFIG = {
     cameraStepPerFloor: 34,
   },
   motion: {
-    hangingSwingBaseDeg: 1.2,
-    hangingSwingMaxDeg: 3.7,
-    hangingSwingMs: 980,
+    hangingSwingBaseDeg: 1.7,
+    hangingSwingMaxDeg: 5.0,
+    hangingSwingMs: 1080,
     towerSwayStartLevel: 2,
     towerSwayFullLevel: 8,
     towerSwayBaseDeg: 0.08,
