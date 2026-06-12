@@ -5,7 +5,7 @@ const CONFIG = {
   stageHeight: 480,
   floorHeight: 34,
   baseHeight: 86,
-  baseSupportHeight: 82,
+  baseSupportHeight: 84,
   baseWidth: 260,
   baseBottom: 76,
   minWidth: 36,
@@ -523,6 +523,10 @@ function getSupportHeight(floor) {
   return floor.level === 0 ? CONFIG.baseSupportHeight : CONFIG.floorHeight;
 }
 
+function getRenderHeight(floor) {
+  return floor.level === 0 ? CONFIG.baseHeight : CONFIG.floorHeight;
+}
+
 function addScrap(x, width, bottom) {
   state.scraps.push({
     id: `scrap-${Date.now()}-${Math.random()}`,
@@ -687,7 +691,7 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
     const bottom = (floor.bottom - worldShift) * scaleY;
-    const height = getSupportHeight(floor) * scaleY;
+    const height = getRenderHeight(floor) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
     if (floor.quality) classes.push(floor.quality);
