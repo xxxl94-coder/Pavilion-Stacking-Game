@@ -46,8 +46,8 @@ const CONFIG = {
     giftPerfectReduction: 0.04,
     minSuccessWidth: 32,
     scrapMinWidth: 5,
-    perfectCenterCorrection: 0.86,
-    goodCenterCorrection: 0.35,
+    perfectCenterCorrection: 0.6,
+    goodCenterCorrection: 0,
     normalCenterCorrection: 0,
   },
   energy: {

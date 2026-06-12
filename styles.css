@@ -327,7 +327,7 @@ h1 {
     0 3px 0 rgba(129, 83, 24, 0.18),
     0 9px 18px rgba(105, 75, 22, 0.18);
   transition:
-    left 0.18s ease,
+    left 0.36s cubic-bezier(0.16, 1, 0.3, 1),
     bottom 0.38s cubic-bezier(0.16, 1, 0.3, 1),
     width 0.2s ease,
     transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
