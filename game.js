@@ -4,7 +4,7 @@ const CONFIG = {
   stageWidth: 720,
   stageHeight: 480,
   floorHeight: 34,
-  baseHeight: 78,
+  baseHeight: 70,
   baseWidth: 260,
   baseBottom: 76,
   minWidth: 36,
