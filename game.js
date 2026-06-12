@@ -5,6 +5,7 @@ const CONFIG = {
   stageHeight: 480,
   floorHeight: 34,
   baseHeight: 86,
+  baseSupportHeight: 82,
   baseWidth: 260,
   baseBottom: 76,
   minWidth: 36,
@@ -26,11 +27,12 @@ const CONFIG = {
     hangingSwingBaseDeg: 1.2,
     hangingSwingMaxDeg: 3.7,
     hangingSwingMs: 980,
-    towerSwayStartLevel: 4,
-    towerSwayBaseDeg: 0.18,
-    towerSwayMaxDeg: 2.9,
-    towerSwayOffsetWeight: 1.7,
-    towerSwayMs: 1450,
+    towerSwayStartLevel: 2,
+    towerSwayFullLevel: 8,
+    towerSwayBaseDeg: 0.08,
+    towerSwayMaxDeg: 2.6,
+    towerSwayOffsetWeight: 1.35,
+    towerSwayMs: 1850,
     cableLength: 236,
     dropSettleMs: 90,
     cameraImpactPx: 16,
@@ -518,7 +520,7 @@ function getTopFloor() {
 }
 
 function getSupportHeight(floor) {
-  return floor.level === 0 ? CONFIG.baseHeight : CONFIG.floorHeight;
+  return floor.level === 0 ? CONFIG.baseSupportHeight : CONFIG.floorHeight;
 }
 
 function addScrap(x, width, bottom) {
@@ -779,18 +781,27 @@ function getTowerSway() {
     return total + Math.abs(currentCenter - previousCenter);
   }, 0);
   const offsetRatio = Math.min(1, offsetTotal / Math.max(1, floors.length * CONFIG.baseWidth * 0.24));
-  const heightRatio = Math.min(1, (state.currentLevel - CONFIG.motion.towerSwayStartLevel + 1) / 12);
+  const rawHeightRatio = Math.min(
+    1,
+    (state.currentLevel - CONFIG.motion.towerSwayStartLevel + 1)
+      / Math.max(1, CONFIG.motion.towerSwayFullLevel - CONFIG.motion.towerSwayStartLevel + 1),
+  );
+  const heightRatio = easeInOut(rawHeightRatio);
   const amplitude = Math.min(
     CONFIG.motion.towerSwayMaxDeg,
     CONFIG.motion.towerSwayBaseDeg
-      + heightRatio * 0.9
-      + offsetRatio * CONFIG.motion.towerSwayOffsetWeight,
+      + heightRatio * 0.72
+      + offsetRatio * CONFIG.motion.towerSwayOffsetWeight * heightRatio,
   );
   const wave = Math.sin((performance.now() / CONFIG.motion.towerSwayMs) * Math.PI * 2);
   return {
     angle: wave * amplitude,
     x: wave * amplitude * 0.7,
   };
+}
+
+function easeInOut(value) {
+  return value * value * (3 - 2 * value);
 }
 
 function renderContributors() {
