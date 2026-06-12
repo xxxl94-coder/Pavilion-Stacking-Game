@@ -27,6 +27,8 @@ const CONFIG = {
     hangingSwingBaseDeg: 1.7,
     hangingSwingMaxDeg: 5.0,
     hangingSwingMs: 1080,
+    hangingBobBasePx: 6,
+    hangingBobMaxPx: 12,
     towerSwayStartLevel: 2,
     towerSwayFullLevel: 8,
     towerSwayBaseDeg: 0.08,
@@ -690,7 +692,8 @@ function renderTower() {
 function renderFloor(floor, scaleX, scaleY, worldShift) {
     const left = floor.x * scaleX;
     const width = floor.width * scaleX;
-    const bottom = (floor.bottom - worldShift) * scaleY;
+    const hangingBob = floor === state.currentFloor ? getHangingBobOffset() : 0;
+    const bottom = (floor.bottom + hangingBob - worldShift) * scaleY;
     const height = getRenderHeight(floor) * scaleY;
     const classes = ["floor"];
     if (floor.level === 0) classes.push("base");
@@ -767,6 +770,15 @@ function getHangingSwingAngle() {
     + (CONFIG.motion.hangingSwingMaxDeg - CONFIG.motion.hangingSwingBaseDeg) * speedRatio;
   const time = performance.now() / CONFIG.motion.hangingSwingMs;
   return Math.sin(time * Math.PI * 2) * amplitude;
+}
+
+function getHangingBobOffset() {
+  if (state.phase !== "moving" || !state.currentFloor) return 0;
+  const speedRatio = Math.min(1, state.speed / CONFIG.gameplay.maxSpeed);
+  const amplitude = CONFIG.motion.hangingBobBasePx
+    + (CONFIG.motion.hangingBobMaxPx - CONFIG.motion.hangingBobBasePx) * speedRatio;
+  const time = performance.now() / CONFIG.motion.hangingSwingMs;
+  return Math.sin(time * Math.PI * 2 + Math.PI / 2) * amplitude;
 }
 
 function getTowerSway() {
