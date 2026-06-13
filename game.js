@@ -563,6 +563,7 @@ function celebrate(text, quality = "good") {
   showFloating(text, 46, 32);
   pulseWorkers();
   spawnParticles("\u2726", quality === "perfect" ? 12 : 8, quality);
+  spawnEffectIcons(quality, quality === "perfect" ? 5 : 3);
 }
 
 function shakeStage() {
@@ -610,6 +611,23 @@ function spawnParticles(char, count, variant = "") {
     node.style.animationDelay = `${Math.random() * 0.25}s`;
     el.toastLayer.appendChild(node);
     setTimeout(() => node.remove(), 1300);
+  }
+}
+
+function spawnEffectIcons(variant, count) {
+  for (let i = 0; i < count; i += 1) {
+    const type = Math.random() > 0.5 ? "heart" : "star";
+    const node = document.createElement("div");
+    node.className = `effect-icon ${variant} ${type}`;
+    node.style.left = `${38 + Math.random() * 24}%`;
+    node.style.top = `${44 + Math.random() * 18}%`;
+    node.style.setProperty("--drift-x", `${(Math.random() - 0.5) * 86}px`);
+    node.style.setProperty("--drift-y", `${-36 - Math.random() * 54}px`);
+    node.style.setProperty("--spin", `${-32 + Math.random() * 64}deg`);
+    node.style.setProperty("--scale", `${0.72 + Math.random() * 0.28}`);
+    node.style.animationDelay = `${Math.random() * 0.16}s`;
+    el.toastLayer.appendChild(node);
+    setTimeout(() => node.remove(), 1250);
   }
 }
 
