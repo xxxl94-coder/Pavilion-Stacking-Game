@@ -561,10 +561,10 @@ function maybeMilestone() {
   if (state.currentLevel >= 8) burstConfetti();
 }
 
-function celebrate(text) {
+function celebrate(text, quality = "good") {
   showFloating(text, 46, 32);
   pulseWorkers();
-  spawnParticles("★", 10);
+  spawnParticles("\u2726", quality === "perfect" ? 12 : 8, quality);
 }
 
 function shakeStage() {
@@ -590,6 +590,7 @@ function showFloating(text, xPercent, yPercent) {
 }
 
 function showLandingEffect(floor, quality) {
+  if (quality !== "perfect" && quality !== "good") return;
   const worldShift = getWorldShift();
   const xPercent = ((floor.x + floor.width / 2) / CONFIG.stageWidth) * 100;
   const yPercent = 100 - ((floor.bottom - worldShift) / CONFIG.stageHeight) * 100;
@@ -601,10 +602,10 @@ function showLandingEffect(floor, quality) {
   setTimeout(() => node.remove(), 900);
 }
 
-function spawnParticles(char, count) {
+function spawnParticles(char, count, variant = "") {
   for (let i = 0; i < count; i += 1) {
     const node = document.createElement("div");
-    node.className = "particle";
+    node.className = `particle ${variant}`.trim();
     node.textContent = char;
     node.style.left = `${18 + Math.random() * 64}%`;
     node.style.top = `${48 + Math.random() * 30}%`;
