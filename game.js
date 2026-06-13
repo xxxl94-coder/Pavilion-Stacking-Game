@@ -40,6 +40,10 @@ const CONFIG = {
     cameraImpactPx: 16,
     cameraImpactMs: 520,
   },
+  visual: {
+    balloonStartLevel: 10,
+    balloonDurationMs: 18000,
+  },
   judgement: {
     perfectRatio: 0.92,
     goodRatio: 0.68,
@@ -97,6 +101,7 @@ const el = {
   messageText: byId("messageText"),
   countdownText: byId("countdownText"),
   stage: byId("stage"),
+  skyBalloon: byId("skyBalloon"),
   tower: byId("tower"),
   workers: byId("workers"),
   toastLayer: byId("toastLayer"),
@@ -679,6 +684,8 @@ function renderTower() {
   el.stage.style.setProperty("--sky-shift-px", `${worldShift * scaleY * 0.16}px`);
   el.stage.style.setProperty("--ground-scale", `${Math.max(0.985, 1.015 - worldShift / 2600).toFixed(3)}`);
   el.stage.style.setProperty("--ground-actor-opacity", `${Math.max(0, 1 - cameraStep / 120)}`);
+  el.stage.style.setProperty("--balloon-duration-ms", `${CONFIG.visual.balloonDurationMs}ms`);
+  el.skyBalloon.classList.toggle("active", state.currentLevel >= CONFIG.visual.balloonStartLevel);
 
   const settledHtml = settledFloors.map((floor) => renderFloor(floor, scaleX, scaleY, worldShift)).join("");
   const currentHtml = state.currentFloor ? renderFloor(state.currentFloor, scaleX, scaleY, worldShift) : "";

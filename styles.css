@@ -249,6 +249,25 @@ h1 {
     transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.sky-balloon {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 19%;
+  width: clamp(58px, 12vw, 88px);
+  aspect-ratio: 1 / 1.28;
+  background: url("./assets/balloon.png") center / contain no-repeat;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-130%, 0, 0) scale(0.92);
+  filter: drop-shadow(0 12px 14px rgba(56, 91, 130, 0.18));
+}
+
+.sky-balloon.active {
+  opacity: 0.92;
+  animation: balloonDrift var(--balloon-duration-ms, 18000ms) linear infinite;
+}
+
 .stage::before {
   content: "";
   position: absolute;
@@ -987,6 +1006,24 @@ h1 {
 @keyframes currentPulse {
   0%, 100% { filter: brightness(1); }
   50% { filter: brightness(1.14); }
+}
+
+@keyframes balloonDrift {
+  0% {
+    transform: translate3d(-130%, 10px, 0) scale(0.92);
+  }
+  25% {
+    transform: translate3d(18vw, -4px, 0) scale(0.96);
+  }
+  50% {
+    transform: translate3d(48vw, 8px, 0) scale(1);
+  }
+  75% {
+    transform: translate3d(78vw, -6px, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(118vw, 6px, 0) scale(0.92);
+  }
 }
 
 @keyframes idleWorker {
