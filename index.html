@@ -12,7 +12,7 @@
     <link rel="preload" href="./assets/crane-rig.png?v=75" as="image" />
     <link rel="preload" href="./assets/floor-tight.png?v=74" as="image" />
     <link rel="preload" href="./assets/base-tight.png?v=74" as="image" />
-    <link rel="stylesheet" href="./styles.css?v=75" />
+    <link rel="stylesheet" href="./styles.css?v=76" />
   </head>
   <body>
     <main class="app-shell">
@@ -29,7 +29,8 @@
             </div>
             <div>
               <span>层数</span>
-              <strong><b id="levelText">0</b> / <b id="targetText">10</b></strong>
+              <span class="level-tower-icon" aria-hidden="true"><i></i></span>
+              <strong class="level-count"><b id="levelText">0</b><small>/</small><b id="targetText">10</b></strong>
             </div>
             <div>
               <span>提示</span>
@@ -135,6 +136,6 @@
       </div>
     </div>
 
-    <script src="./game.js?v=75"></script>
+    <script src="./game.js?v=76"></script>
   </body>
 </html>
