@@ -580,6 +580,18 @@ h1 {
   z-index: 4;
 }
 
+.crane-rig {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 24px);
+  width: 76px;
+  height: calc(var(--cable-length, 236px) + 82px);
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: url("./assets/crane-rig.png") center bottom / contain no-repeat;
+  filter: drop-shadow(0 8px 10px rgba(76, 67, 42, 0.12));
+}
+
 .crane-line {
   position: absolute;
   left: 50%;

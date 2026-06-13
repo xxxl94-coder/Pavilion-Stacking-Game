@@ -732,7 +732,7 @@ function renderFloor(floor, scaleX, scaleY, worldShift) {
     const tilt = floor === state.currentFloor ? getHangingSwingAngle() : 0;
     const cableLength = CONFIG.motion.cableLength * scaleY;
     const rigging = floor === state.currentFloor && state.phase === "moving"
-      ? `<span class="crane-line"><span class="crane-trolley"></span><span class="crane-hook"></span></span>`
+      ? `<span class="crane-rig"></span>`
       : "";
     const facade = `
       <span class="floor-shadow"></span>
