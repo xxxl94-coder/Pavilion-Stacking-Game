@@ -41,7 +41,7 @@ const CONFIG = {
     cameraImpactMs: 520,
   },
   visual: {
-    balloonStartLevel: 10,
+    balloonStartLevel: 8,
     balloonDurationMs: 24000,
   },
   judgement: {
