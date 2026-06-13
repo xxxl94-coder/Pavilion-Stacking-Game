@@ -606,9 +606,13 @@ function spawnParticles(char, count, variant = "") {
     const node = document.createElement("div");
     node.className = `particle ${variant}`.trim();
     node.textContent = char;
-    node.style.left = `${18 + Math.random() * 64}%`;
-    node.style.top = `${48 + Math.random() * 30}%`;
-    node.style.animationDelay = `${Math.random() * 0.25}s`;
+    node.style.left = `${38 + Math.random() * 24}%`;
+    node.style.top = `${44 + Math.random() * 18}%`;
+    node.style.setProperty("--drift-x", `${(Math.random() - 0.5) * 96}px`);
+    node.style.setProperty("--drift-y", `${-34 - Math.random() * 58}px`);
+    node.style.setProperty("--spin", `${-38 + Math.random() * 76}deg`);
+    node.style.setProperty("--scale", `${0.82 + Math.random() * 0.26}`);
+    node.style.animationDelay = `${Math.random() * 0.16}s`;
     el.toastLayer.appendChild(node);
     setTimeout(() => node.remove(), 1300);
   }
