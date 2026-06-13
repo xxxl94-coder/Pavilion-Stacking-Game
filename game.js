@@ -677,7 +677,7 @@ function renderTower() {
   const towerSway = getTowerSway();
   el.stage.style.setProperty("--world-shift-px", `${worldShift * scaleY}px`);
   el.stage.style.setProperty("--sky-shift-px", `${Math.min(worldShift * scaleY * 0.16, 180)}px`);
-  el.stage.style.setProperty("--ground-scale", `${Math.max(0.92, 1 - worldShift / 1200).toFixed(3)}`);
+  el.stage.style.setProperty("--ground-scale", `${Math.max(0.985, 1.015 - worldShift / 2600).toFixed(3)}`);
   el.stage.style.setProperty("--ground-actor-opacity", `${Math.max(0, 1 - cameraStep / 120)}`);
 
   const settledHtml = settledFloors.map((floor) => renderFloor(floor, scaleX, scaleY, worldShift)).join("");
