@@ -289,39 +289,6 @@ h1 {
   display: none;
 }
 
-.aurora {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(100deg, transparent 18%, rgba(255, 255, 255, 0.34) 28%, transparent 42%),
-    linear-gradient(76deg, transparent 55%, rgba(255, 118, 102, 0.2) 62%, transparent 74%);
-  opacity: 0.26;
-  animation: shine 8s linear infinite;
-  pointer-events: none;
-}
-
-.spotlight {
-  position: absolute;
-  z-index: 1;
-  top: -70px;
-  width: 230px;
-  height: 560px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.04) 68%, rgba(255, 255, 255, 0));
-  clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
-  opacity: 0.2;
-}
-
-.spotlight-left {
-  left: 28px;
-  transform: rotate(-16deg);
-}
-
-.spotlight-right {
-  right: 28px;
-  transform: rotate(16deg);
-}
-
 .tower {
   position: absolute;
   inset: 0;
@@ -1015,11 +982,6 @@ h1 {
 #resultComment {
   color: var(--muted);
   font-weight: 800;
-}
-
-@keyframes shine {
-  from { transform: translateX(-18%); }
-  to { transform: translateX(18%); }
 }
 
 @keyframes currentPulse {
