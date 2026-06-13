@@ -42,7 +42,7 @@ const CONFIG = {
   },
   visual: {
     balloonStartLevel: 10,
-    balloonDurationMs: 18000,
+    balloonDurationMs: 24000,
   },
   judgement: {
     perfectRatio: 0.92,

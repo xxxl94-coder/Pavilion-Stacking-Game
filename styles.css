@@ -253,19 +253,21 @@ h1 {
   position: absolute;
   z-index: 1;
   left: 0;
-  top: 19%;
-  width: clamp(58px, 12vw, 88px);
+  top: 15%;
+  width: clamp(70px, 14vw, 108px);
   aspect-ratio: 1 / 1.28;
   background: url("./assets/balloon.png") center / contain no-repeat;
   pointer-events: none;
   opacity: 0;
-  transform: translate3d(-130%, 0, 0) scale(0.92);
-  filter: drop-shadow(0 12px 14px rgba(56, 91, 130, 0.18));
+  transform: translate3d(-140%, 0, 0) scale(0.88);
+  filter:
+    drop-shadow(0 10px 14px rgba(56, 91, 130, 0.15))
+    saturate(1.08);
 }
 
 .sky-balloon.active {
-  opacity: 0.92;
-  animation: balloonDrift var(--balloon-duration-ms, 18000ms) linear infinite;
+  opacity: 0.88;
+  animation: balloonDrift var(--balloon-duration-ms, 24000ms) linear infinite;
 }
 
 .stage::before {
@@ -1010,19 +1012,19 @@ h1 {
 
 @keyframes balloonDrift {
   0% {
-    transform: translate3d(-130%, 10px, 0) scale(0.92);
+    transform: translate3d(-140%, 12px, 0) scale(0.88);
   }
   25% {
-    transform: translate3d(18vw, -4px, 0) scale(0.96);
+    transform: translate3d(14vw, -6px, 0) scale(0.92);
   }
   50% {
-    transform: translate3d(48vw, 8px, 0) scale(1);
+    transform: translate3d(45vw, 8px, 0) scale(0.96);
   }
   75% {
-    transform: translate3d(78vw, -6px, 0) scale(0.96);
+    transform: translate3d(76vw, -8px, 0) scale(0.92);
   }
   100% {
-    transform: translate3d(118vw, 6px, 0) scale(0.92);
+    transform: translate3d(120vw, 10px, 0) scale(0.88);
   }
 }
 
