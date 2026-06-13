@@ -469,8 +469,6 @@ function addEnergy(type, amount, strongBoost = false) {
     clearTimeout(boostTimer);
     boostTimer = setTimeout(render, CONFIG.energy.giftBoostMs + 50);
   }
-  showFloating(`${names[type][1]} +${amount}`, 22 + Math.random() * 54, 68);
-  spawnParticles(names[type][2], type === "gift" ? 14 : 8);
   pulseWorkers();
   render();
 }
