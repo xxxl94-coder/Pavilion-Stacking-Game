@@ -268,6 +268,7 @@ h1 {
 .sky-balloon.active {
   opacity: 0.88;
   animation: balloonDrift var(--balloon-duration-ms, 24000ms) linear infinite;
+  animation-delay: -5200ms;
 }
 
 .stage::before {
