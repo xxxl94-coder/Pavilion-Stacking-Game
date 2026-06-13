@@ -7,7 +7,7 @@ const CONFIG = {
   baseHeight: 86,
   baseSupportHeight: 84,
   baseWidth: 260,
-  baseBottom: 76,
+  baseBottom: 112,
   minWidth: 36,
   profileName: "演示友好",
   gameplay: {

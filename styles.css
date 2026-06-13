@@ -1242,7 +1242,7 @@ h1 {
 
   .workers {
     left: 18px;
-    bottom: calc(126px - var(--world-shift-px, 0px));
+    bottom: calc(154px - var(--world-shift-px, 0px));
     font-size: 24px;
     opacity: var(--ground-actor-opacity, 1);
     transition: bottom 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
