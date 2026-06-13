@@ -232,7 +232,7 @@ h1 {
   z-index: 0;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-    url("./assets/sky-bg.webp") center calc(50% + var(--sky-shift-px, 0px)) / cover no-repeat;
+    url("./assets/sky-loop.webp") center calc(0px - var(--sky-shift-px, 0px)) / 100% auto repeat-y;
 }
 
 .scene-ground {
