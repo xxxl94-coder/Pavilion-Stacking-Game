@@ -347,7 +347,8 @@ function judgeCurrentFloor() {
 
 function handleFail(current) {
   current.quality = "fail-piece";
-  state.scraps.push({ ...current, id: `scrap-${Date.now()}` });
+  const scrapId = `scrap-${Date.now()}`;
+  state.scraps.push({ ...current, id: scrapId });
   state.currentFloor = null;
   state.energy = 0;
   state.comboPerfect = 0;
@@ -357,6 +358,7 @@ function handleFail(current) {
   shakeStage();
   showFloating("塌了！", 50, 35);
   render();
+  clearScrapAfter(scrapId, 920);
   setTimeout(() => {
     if (state.lives <= 0) {
       finishGame(false);
@@ -372,7 +374,8 @@ function handleTimeout() {
   cancelAnimationFrame(rafId);
   const timedOutFloor = state.currentFloor;
   timedOutFloor.quality = "timeout-piece";
-  state.scraps.push({ ...timedOutFloor, id: `timeout-${Date.now()}` });
+  const scrapId = `timeout-${Date.now()}`;
+  state.scraps.push({ ...timedOutFloor, id: scrapId });
   state.currentFloor = null;
   state.energy = 0;
   state.comboPerfect = 0;
@@ -381,6 +384,7 @@ function handleTimeout() {
   state.message = "超时未落层，楼层失控";
   showFloating("超时！", 50, 35);
   render();
+  clearScrapAfter(scrapId, 860);
   setTimeout(() => {
     if (state.lives <= 0) {
       finishGame(false);
@@ -388,6 +392,14 @@ function handleTimeout() {
     }
     spawnCurrentFloor();
   }, 820);
+}
+
+function clearScrapAfter(scrapId, delayMs) {
+  window.setTimeout(() => {
+    const previousLength = state.scraps.length;
+    state.scraps = state.scraps.filter((scrap) => scrap.id !== scrapId);
+    if (state.scraps.length !== previousLength) renderTower();
+  }, delayMs);
 }
 
 function finishGame(success) {
