@@ -1,5 +1,5 @@
 const CONFIG = {
-  targetLevel: Infinity,
+  targetLevel: 100,
   lives: 3,
   stageWidth: 720,
   stageHeight: 480,
