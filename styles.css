@@ -647,18 +647,18 @@ h1 {
   position: absolute;
   left: 50%;
   bottom: 76px;
-  width: 13px;
+  width: 7px;
   height: calc(var(--cable-length, 236px) + 760px);
   transform: translateX(-50%);
   border-radius: 999px;
   background:
-    repeating-linear-gradient(36deg, rgba(255, 255, 255, 0.5) 0 4px, transparent 4px 9px),
-    repeating-linear-gradient(-36deg, rgba(170, 103, 24, 0.25) 0 4px, transparent 4px 9px),
-    linear-gradient(90deg, #a96b22 0%, #ffe08a 42%, #f5ad35 70%, #8d571d 100%);
+    repeating-linear-gradient(36deg, rgba(255, 255, 255, 0.34) 0 3px, transparent 3px 8px),
+    repeating-linear-gradient(-36deg, rgba(170, 103, 24, 0.18) 0 3px, transparent 3px 8px),
+    linear-gradient(90deg, #b77728 0%, #f4cf79 45%, #e7a13a 72%, #9b651f 100%);
   box-shadow:
-    inset 2px 0 0 rgba(255, 244, 180, 0.48),
-    inset -2px 0 0 rgba(118, 69, 21, 0.22),
-    0 2px 3px rgba(84, 58, 28, 0.18);
+    inset 1px 0 0 rgba(255, 244, 180, 0.34),
+    inset -1px 0 0 rgba(118, 69, 21, 0.16),
+    0 1px 2px rgba(84, 58, 28, 0.12);
 }
 
 .floor.perfect {
@@ -1326,7 +1326,7 @@ h1 {
     text-align: right;
     color: #f2ad36;
     font-size: 12px;
-    letter-spacing: 1px;
+    letter-spacing: 0;
     line-height: 1;
     text-shadow:
       0 1px 0 rgba(255, 255, 255, 0.7),
@@ -1365,6 +1365,43 @@ h1 {
     flex: 1;
     text-align: right;
     font-size: 13px;
+  }
+
+  .status-strip > div:nth-child(1),
+  .status-strip > div:nth-child(2),
+  .rank-card {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 6px;
+  }
+
+  .status-strip > div:nth-child(1)::before,
+  .status-strip > div:nth-child(2)::before,
+  .rank-card span {
+    grid-column: 1;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+    color: rgba(38, 48, 68, 0.64);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: left;
+  }
+
+  #phaseText,
+  .level-count,
+  .rank-card strong {
+    grid-column: 2;
+    width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+    text-align: right;
+  }
+
+  .level-count {
+    justify-content: flex-end;
   }
 
   .content-grid {
@@ -1548,9 +1585,20 @@ h1 {
   .status-strip > div:nth-child(1),
   .status-strip > div:nth-child(2),
   .rank-card {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 6px;
     width: 104px;
     height: 28px;
     padding: 0 8px;
+  }
+
+  .status-strip > div:nth-child(1)::before,
+  .status-strip > div:nth-child(2)::before,
+  .rank-card span {
+    margin: 0;
+    text-align: left;
   }
 
   .rank-card {
