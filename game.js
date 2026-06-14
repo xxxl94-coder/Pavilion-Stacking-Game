@@ -129,6 +129,8 @@ const el = {
   dropBtn: byId("dropBtn"),
   autoBtn: byId("autoBtn"),
   resetBtn: byId("resetBtn"),
+  coverScreen: byId("coverScreen"),
+  coverStartBtn: byId("coverStartBtn"),
   resultModal: byId("resultModal"),
   resultTitle: byId("resultTitle"),
   resultHeight: byId("resultHeight"),
@@ -181,6 +183,7 @@ function createInitialState() {
 
 function bindEvents() {
   el.startBtn.addEventListener("click", startGame);
+  el.coverStartBtn.addEventListener("click", startGame);
   el.dropBtn.addEventListener("click", dropCurrentFloor);
   el.likeBtn.addEventListener("click", () => addEnergy("like", CONFIG.energy.likeGain));
   el.commentBtn.addEventListener("click", () => addEnergy("comment", CONFIG.energy.commentGain));
@@ -204,6 +207,12 @@ function handleStageTap() {
 
 function startGame() {
   if (state.phase !== "waiting" && state.phase !== "result") return;
+  if (document.body.classList.contains("cover-active")) {
+    document.body.classList.add("cover-leaving");
+    window.setTimeout(() => {
+      document.body.classList.remove("cover-active", "cover-leaving");
+    }, 300);
+  }
   el.resultModal.classList.add("hidden");
   state.phase = "countdown";
   state.message = "施工队集合中";

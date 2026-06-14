@@ -12,9 +12,9 @@
     <link rel="preload" href="./assets/crane-rig.png?v=75" as="image" />
     <link rel="preload" href="./assets/floor-tight.png?v=74" as="image" />
     <link rel="preload" href="./assets/base-tight.png?v=74" as="image" />
-    <link rel="stylesheet" href="./styles.css?v=86" />
+    <link rel="stylesheet" href="./styles.css?v=87" />
   </head>
-  <body>
+  <body class="cover-active">
     <main class="app-shell">
       <section class="game-frame" aria-label="展馆叠叠乐小游戏">
         <header class="top-bar">
@@ -122,6 +122,19 @@
           <button id="autoBtn" type="button" class="secondary">自动模式</button>
           <button id="resetBtn" type="button" class="secondary">再来一局</button>
         </footer>
+
+        <div class="cover-screen" id="coverScreen" aria-label="Game cover">
+          <div class="cover-content">
+            <div class="cover-mark" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <h2>展馆叠叠乐</h2>
+            <p>展馆施工挑战</p>
+            <button id="coverStartBtn" type="button">开始挑战</button>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -140,6 +153,6 @@
       </div>
     </div>
 
-    <script src="./game.js?v=86"></script>
+    <script src="./game.js?v=87"></script>
   </body>
 </html>

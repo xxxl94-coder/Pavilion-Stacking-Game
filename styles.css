@@ -994,6 +994,119 @@ h1 {
   background: var(--blue);
 }
 
+.cover-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 18;
+  display: none;
+  place-items: center;
+  padding: 28px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(102, 190, 238, 0.2), rgba(179, 231, 255, 0.06)),
+    url("./assets/ground-plane.webp?v=74") center bottom / 130% auto no-repeat,
+    url("./assets/sky-loop.webp?v=74") center top / 100% auto repeat-y,
+    #8bdcf7;
+  opacity: 1;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+body.cover-active .cover-screen {
+  display: grid;
+}
+
+body.cover-leaving .cover-screen {
+  opacity: 0;
+  transform: scale(1.01);
+}
+
+body.cover-active .top-bar,
+body.cover-active .stage-head,
+body.cover-active .control-panel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cover-content {
+  width: min(360px, 86vw);
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  transform: translateY(-8px);
+  text-align: center;
+}
+
+.cover-mark {
+  position: relative;
+  width: 168px;
+  height: 116px;
+  filter:
+    drop-shadow(0 12px 16px rgba(96, 64, 25, 0.18))
+    drop-shadow(0 0 18px rgba(255, 222, 111, 0.22));
+}
+
+.cover-mark span {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 130px;
+  height: 42px;
+  border-radius: 6px;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.75), transparent 24%, transparent 76%, rgba(154, 88, 24, 0.16)),
+    url("./assets/floor-tight.png?v=74") center / 100% 100% no-repeat;
+}
+
+.cover-mark span:nth-child(1) {
+  bottom: 0;
+}
+
+.cover-mark span:nth-child(2) {
+  bottom: 36px;
+  transform: translateX(-45%) rotate(-3deg);
+}
+
+.cover-mark span:nth-child(3) {
+  bottom: 72px;
+  transform: translateX(-55%) rotate(4deg);
+}
+
+.cover-content h2 {
+  margin: 0;
+  color: #fff8d8;
+  font-size: clamp(42px, 12vw, 62px);
+  line-height: 0.92;
+  text-shadow:
+    0 4px 0 #b66b1f,
+    0 8px 18px rgba(75, 49, 21, 0.28),
+    0 0 18px rgba(255, 236, 137, 0.45);
+}
+
+.cover-content p {
+  margin: 0;
+  padding: 4px 14px;
+  border-radius: 999px;
+  color: rgba(38, 48, 68, 0.72);
+  background: rgba(255, 255, 255, 0.56);
+  font-weight: 900;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.cover-content button {
+  margin-top: 18px;
+  min-width: 210px;
+  min-height: 54px;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  color: #5d3817;
+  background:
+    linear-gradient(180deg, #fff6c9 0%, #ffd36f 50%, #e79a35 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    0 12px 24px rgba(87, 61, 29, 0.18);
+}
+
 .result-modal {
   position: fixed;
   inset: 0;
@@ -1141,6 +1254,20 @@ h1 {
   body {
     height: 100%;
     overflow: hidden;
+  }
+
+  .cover-screen {
+    padding: max(68px, env(safe-area-inset-top)) 24px max(84px, env(safe-area-inset-bottom));
+    align-items: center;
+    background:
+      linear-gradient(180deg, rgba(102, 190, 238, 0.12), rgba(179, 231, 255, 0.02)),
+      url("./assets/ground-plane.webp?v=74") center bottom / 136% auto no-repeat,
+      url("./assets/sky-loop.webp?v=74") center top / 100% auto repeat-y,
+      #8bdcf7;
+  }
+
+  .cover-content {
+    transform: translateY(-18px);
   }
 
   .app-shell {
