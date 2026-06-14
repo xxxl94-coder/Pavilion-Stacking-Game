@@ -1148,7 +1148,7 @@ h1 {
   .top-bar {
     position: absolute;
     top: max(30px, calc(env(safe-area-inset-top) + 24px));
-    left: 10px;
+    left: 18px;
     right: auto;
     transform: none;
     z-index: 8;
@@ -1184,9 +1184,9 @@ h1 {
     position: relative;
     display: flex;
     align-items: center;
-    min-width: 104px;
+    width: 126px;
     height: 34px;
-    padding: 0 11px;
+    padding: 0 10px;
     border: 1px solid rgba(255, 255, 255, 0.72);
     border-radius: 999px;
     background:
@@ -1200,21 +1200,23 @@ h1 {
 
   .status-strip > div:nth-child(1)::before {
     content: "生命";
+    flex: 0 0 34px;
     margin-right: 8px;
     color: rgba(38, 48, 68, 0.64);
     font-size: 11px;
     font-weight: 900;
+    line-height: 1;
   }
 
   .status-strip > div:nth-child(2) {
     position: relative;
     display: flex;
     align-items: center;
-    min-width: 0;
-    height: 42px;
-    padding: 0 13px 0 36px;
+    width: 126px;
+    height: 34px;
+    padding: 0 10px;
     border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 3px 11px 11px 3px;
+    border-radius: 999px;
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.2)),
       rgba(194, 218, 237, 0.58);
@@ -1224,11 +1226,18 @@ h1 {
     backdrop-filter: blur(8px);
   }
 
+  .status-strip > div:nth-child(2)::before {
+    content: "楼层";
+    flex: 0 0 34px;
+    margin-right: 8px;
+    color: rgba(38, 48, 68, 0.64);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
   .status-strip .level-tower-icon {
-    position: absolute;
-    left: -7px;
-    bottom: 2px;
-    display: block;
+    display: none;
     width: 31px;
     height: 47px;
     border: 2px solid rgba(172, 111, 35, 0.88);
@@ -1303,13 +1312,23 @@ h1 {
   }
 
   .rank-card {
-    top: max(122px, calc(env(safe-area-inset-top) + 116px));
-    left: 10px;
+    top: max(114px, calc(env(safe-area-inset-top) + 108px));
+    left: 18px;
     right: auto;
     height: 34px;
-    min-width: 104px;
+    width: 126px;
+    min-width: 0;
     padding: 0 11px;
-    gap: 6px;
+    gap: 8px;
+  }
+
+  .rank-card span {
+    flex: 0 0 34px;
+    font-size: 11px;
+  }
+
+  .rank-card strong {
+    font-size: 15px;
   }
 
   .content-grid {
