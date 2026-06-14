@@ -684,7 +684,7 @@ h1 {
   left: 28px;
   bottom: 78px;
   z-index: 3;
-  display: flex;
+  display: none;
   gap: 8px;
   font-size: 27px;
 }
@@ -1273,13 +1273,7 @@ h1 {
   }
 
   .turn-timer span {
-    position: absolute;
-    top: 9px;
-    left: 10px;
-    margin: 0;
-    color: rgba(38, 48, 68, 0.72);
-    font-size: 11px;
-    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.6);
+    display: none;
   }
 
   .turn-timer-track {
