@@ -1,6 +1,6 @@
 const CONFIG = {
   targetLevel: Infinity,
-  lives: 1,
+  lives: 3,
   stageWidth: 720,
   stageHeight: 480,
   floorHeight: 34,
@@ -357,7 +357,13 @@ function handleFail(current) {
   shakeStage();
   showFloating("塌了！", 50, 35);
   render();
-  setTimeout(() => finishGame(false), 820);
+  setTimeout(() => {
+    if (state.lives <= 0) {
+      finishGame(false);
+      return;
+    }
+    spawnCurrentFloor();
+  }, 820);
 }
 
 function handleTimeout() {
@@ -375,7 +381,13 @@ function handleTimeout() {
   state.message = "超时未落层，楼层失控";
   showFloating("超时！", 50, 35);
   render();
-  setTimeout(() => finishGame(false), 820);
+  setTimeout(() => {
+    if (state.lives <= 0) {
+      finishGame(false);
+      return;
+    }
+    spawnCurrentFloor();
+  }, 820);
 }
 
 function finishGame(success) {
@@ -665,9 +677,13 @@ function getCurrentRank() {
   return 1 + rankBenchmarks.filter((level) => level > state.currentLevel).length;
 }
 
+function getLivesDisplay() {
+  return Array.from({ length: CONFIG.lives }, (_, index) => index < state.lives ? "◆" : "◇").join("");
+}
+
 function render() {
   document.body.dataset.phase = state.phase;
-  el.phaseText.textContent = phaseNames[state.phase];
+  el.phaseText.textContent = getLivesDisplay();
   el.levelText.textContent = state.currentLevel;
   el.targetText.textContent = Number.isFinite(state.targetLevel) ? state.targetLevel : "∞";
   el.messageText.textContent = state.message;
