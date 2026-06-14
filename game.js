@@ -75,6 +75,8 @@ const contributors = [
   { name: "@叠楼达人", score: 12, action: "like" },
 ];
 
+const rankBenchmarks = [48, 42, 36, 31, 27, 23, 20, 17, 14, 11, 8, 5, 3, 1];
+
 const phaseNames = {
   waiting: "等待开始",
   countdown: "开工倒计时",
@@ -117,6 +119,7 @@ const el = {
   mobileEnergyText: byId("mobileEnergyText"),
   turnTimerText: byId("turnTimerText"),
   turnTimerFill: byId("turnTimerFill"),
+  rankText: byId("rankText"),
   contributors: byId("contributors"),
   leaderText: byId("leaderText"),
   startBtn: byId("startBtn"),
@@ -658,6 +661,10 @@ function getLeader() {
   return [...contributors].sort((a, b) => b.score - a.score)[0];
 }
 
+function getCurrentRank() {
+  return 1 + rankBenchmarks.filter((level) => level > state.currentLevel).length;
+}
+
 function render() {
   document.body.dataset.phase = state.phase;
   el.phaseText.textContent = phaseNames[state.phase];
@@ -672,6 +679,7 @@ function render() {
   el.mobileHeightText.textContent = state.currentLevel;
   el.mobilePerfectText.textContent = state.perfectCount;
   el.mobileEnergyText.textContent = state.energy;
+  el.rankText.textContent = `#${getCurrentRank()}`;
   el.boostText.textContent = Date.now() < state.boostUntil
     ? "礼物加成中，Perfect 容错扩大。"
     : "能量越高，移动越稳。";
